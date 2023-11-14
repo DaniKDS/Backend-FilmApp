@@ -1,5 +1,7 @@
 package com.example.moviematchbackend.controller;
 
-public class FilmController {
+import com.example.moviematchbackend.repositories.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
+public class FilmController {
 }
