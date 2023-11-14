@@ -44,4 +44,6 @@ public class Pereche implements Serializable{
     public void setId_utilizator(Long id_utilizator) {
         this.id_utilizator = id_utilizator;
     }
+
+
 }

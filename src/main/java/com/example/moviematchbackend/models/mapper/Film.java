@@ -32,12 +32,6 @@ public class Film implements Serializable {
     @Column(name = "descriere_film")
     private String descriereFilm;
 
-    @Column(name = "actor_film")
-    private String actorFilm;
-
-    @Column(name = "regizor_film")
-    private String regizorFilm;
-
     @Column(name = "an_film")
     private int anFilm;
 
@@ -90,22 +84,6 @@ public class Film implements Serializable {
 
     public void setDescriereFilm(String descriereFilm) {
         this.descriereFilm = descriereFilm;
-    }
-
-    public String getActorFilm() {
-        return actorFilm;
-    }
-
-    public void setActorFilm(String actorFilm) {
-        this.actorFilm = actorFilm;
-    }
-
-    public String getRegizorFilm() {
-        return regizorFilm;
-    }
-
-    public void setRegizorFilm(String regizorFilm) {
-        this.regizorFilm = regizorFilm;
     }
 
     public int getAnFilm() {
