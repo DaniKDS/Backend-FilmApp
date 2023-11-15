@@ -2,6 +2,7 @@ package com.example.moviematchbackend.models.mapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,8 +32,8 @@ public class Film implements Serializable {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pereche> pereche;
 
-    public Film() {
-    }
+    @Column(name = "imagine_film", length = 1000000)
+    private byte[] imagineFilm;
 
     public Long getIdFilm() {
         return idFilm;

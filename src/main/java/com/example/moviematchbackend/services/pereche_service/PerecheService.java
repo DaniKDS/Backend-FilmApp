@@ -41,7 +41,7 @@ public class PerecheService implements PerecheServiceInterface{
         this.perecheRepository.delete(pereche);
     }
 
-    public Object getPerecheByIdUtilizator(Long idUtilizator) {
-        return this.perecheRepository.getPerecheByIdUtilizator(idUtilizator);
-    }
+//    public Object getPerecheByIdUtilizator(Long idUtilizator) {
+//        return this.perecheRepository.getPerecheByIdUtilizator(idUtilizator);
+//    }
 }

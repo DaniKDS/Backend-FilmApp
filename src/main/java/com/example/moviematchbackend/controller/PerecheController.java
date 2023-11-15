@@ -26,10 +26,10 @@ public class PerecheController {
         return this.perecheService.getPerecheById(id).toString();
     }
 
-    @GetMapping("/api/perechi/{id_utilizator}")
-    public String getPerecheByIdUtilizator(Long id_utilizator) {
-        return this.perecheService.getPerecheByIdUtilizator(id_utilizator).toString();
-    }
+//    @GetMapping("/api/perechi/{id_utilizator}")
+//    public String getPerecheByIdUtilizator(Long id_utilizator) {
+//        return this.perecheService.getPerecheByIdUtilizator(id_utilizator).toString();
+//    }
 
     @DeleteMapping("/api/perechi/{id}")
     public void deletePereche(Long id) {

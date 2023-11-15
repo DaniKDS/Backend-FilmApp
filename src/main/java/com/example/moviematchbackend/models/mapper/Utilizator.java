@@ -33,9 +33,9 @@ public class Utilizator implements Serializable {
     @OneToMany(mappedBy = "utilizator", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pereche> pereche;
 
-    @JsonIgnoreProperties("prieteni")
-    @OneToMany(mappedBy = "prieteni", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Prietenie> prieteni;
+//    @JsonIgnoreProperties("prieteni")
+//    @OneToMany(mappedBy = "prieteni", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Prietenie> prieteni;
 
     public Utilizator() {
     }
@@ -94,13 +94,5 @@ public class Utilizator implements Serializable {
 
     public void setPereche(List<Pereche> pereche) {
         this.pereche = pereche;
-    }
-
-    public List<Prietenie> getPrieteni() {
-        return prieteni;
-    }
-
-    public void setPrieteni(List<Prietenie> prieteni) {
-        this.prieteni = prieteni;
     }
 }
