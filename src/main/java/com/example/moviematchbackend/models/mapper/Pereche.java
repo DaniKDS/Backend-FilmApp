@@ -6,25 +6,27 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "pereche")
-public class Pereche implements Serializable{
+public class Pereche implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPereche;
 
-    @Column(name = "id_film")
-    private Long idFilm;
+    @ManyToOne
+    @JoinColumn(name = "id_film")
+    private Film film;
 
-    @Column(name = "id_utilizator")
-    private Long idUtilizator;
+    @ManyToOne
+    @JoinColumn(name = "id_utilizator")
+    private Utilizator utilizator;
 
     public Pereche() {
     }
 
-    public Pereche(Long idPereche, Long idFilm, Long idUtilizator) {
+    public Pereche(Long idPereche, Film film, Utilizator utilizator) {
         this.idPereche = idPereche;
-        this.idFilm = idFilm;
-        this.idUtilizator = idUtilizator;
+        this.film = film;
+        this.utilizator = utilizator;
     }
 
     public Long getIdPereche() {
@@ -35,20 +37,19 @@ public class Pereche implements Serializable{
         this.idPereche = idPereche;
     }
 
-    public Long getIdFilm() {
-        return idFilm;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setIdFilm(Long idFilm) {
-        this.idFilm = idFilm;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
-    public Long getIdUtilizator() {
-        return idUtilizator;
+    public Utilizator getUtilizator() {
+        return utilizator;
     }
 
-    public void setIdUtilizator(Long idUtilizator) {
-        this.idUtilizator = idUtilizator;
+    public void setUtilizator(Utilizator utilizator) {
+        this.utilizator = utilizator;
     }
-
 }

@@ -16,19 +16,21 @@ public class Prietenie implements Serializable {
     @Column(name = "id_prietenie")
     private Long idPrietenie;
 
-    @Column(name = "id_utilizator1")
-    private Long idUtilizator1;
+    @ManyToOne
+    @JoinColumn(name = "id_utilizator1")
+    private Utilizator utilizator1;
 
-    @Column(name = "id_utilizator2")
-    private Long idUtilizator2;
+    @ManyToOne
+    @JoinColumn(name = "id_utilizator2")
+    private Utilizator utilizator2;
 
     public Prietenie() {
     }
 
-    public Prietenie(Long idPrietenie, Long idUtilizator1, Long idUtilizator2) {
+    public Prietenie(Long idPrietenie, Utilizator utilizator1, Utilizator utilizator2) {
         this.idPrietenie = idPrietenie;
-        this.idUtilizator1 = idUtilizator1;
-        this.idUtilizator2 = idUtilizator2;
+        this.utilizator1 = utilizator1;
+        this.utilizator2 = utilizator2;
     }
 
     public Long getIdPrietenie() {
@@ -39,20 +41,20 @@ public class Prietenie implements Serializable {
         this.idPrietenie = idPrietenie;
     }
 
-    public Long getIdUtilizator1() {
-        return idUtilizator1;
+    public Utilizator getUtilizator1() {
+        return utilizator1;
     }
 
-    public void setIdUtilizator1(Long idUtilizator1) {
-        this.idUtilizator1 = idUtilizator1;
+    public void setUtilizator1(Utilizator utilizator1) {
+        this.utilizator1 = utilizator1;
     }
 
-    public Long getIdUtilizator2() {
-        return idUtilizator2;
+    public Utilizator getUtilizator2() {
+        return utilizator2;
     }
 
-    public void setIdUtilizator2(Long idUtilizator2) {
-        this.idUtilizator2 = idUtilizator2;
+    public void setUtilizator2(Utilizator utilizator2) {
+        this.utilizator2 = utilizator2;
     }
 
 }

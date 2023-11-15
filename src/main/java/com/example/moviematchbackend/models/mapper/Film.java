@@ -1,17 +1,13 @@
 package com.example.moviematchbackend.models.mapper;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "film")
-
 public class Film implements Serializable {
 
     @Id
@@ -19,31 +15,23 @@ public class Film implements Serializable {
     @Column(name = "id_film")
     private Long idFilm;
 
-    @Column(name = "titlu_film")
+    @Column(name = "titlu")
     private String titluFilm;
 
-    @Column(name = "gen_film")
+    @Column(name = "gen")
     private String genFilm;
 
-    @Column(name = "durata_film")
-    private int durataFilm;
+    @Column(name = "durata")
+    private String durataFilm;
 
-    @Column(name = "descriere_film")
+    @Column(name = "descriere")
     private String descriereFilm;
 
-    @Column(name = "an_film")
-    private int anFilm;
+    @JsonIgnoreProperties("film") // Update this line to reference the field in the Pereche class
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pereche> pereche;
 
     public Film() {
-    }
-
-    public Film(Long idFilm, String titluFilm, String genFilm, int durataFilm, String descriereFilm, int anFilm) {
-        this.idFilm = idFilm;
-        this.titluFilm = titluFilm;
-        this.genFilm = genFilm;
-        this.durataFilm = durataFilm;
-        this.descriereFilm = descriereFilm;
-        this.anFilm = anFilm;
     }
 
     public Long getIdFilm() {
@@ -70,11 +58,11 @@ public class Film implements Serializable {
         this.genFilm = genFilm;
     }
 
-    public int getDurataFilm() {
+    public String getDurataFilm() {
         return durataFilm;
     }
 
-    public void setDurataFilm(int durataFilm) {
+    public void setDurataFilm(String durataFilm) {
         this.durataFilm = durataFilm;
     }
 
@@ -86,11 +74,23 @@ public class Film implements Serializable {
         this.descriereFilm = descriereFilm;
     }
 
-    public int getAnFilm() {
-        return anFilm;
+    public List<Pereche> getPereche() {
+        return pereche;
     }
 
-    public void setAnFilm(int anFilm) {
-        this.anFilm = anFilm;
+    public void setPereche(List<Pereche> pereche) {
+        this.pereche = pereche;
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+            "idFilm=" + idFilm +
+            ", titluFilm='" + titluFilm + '\'' +
+            ", genFilm='" + genFilm + '\'' +
+            ", durataFilm='" + durataFilm + '\'' +
+            ", descriereFilm='" + descriereFilm + '\'' +
+            ", pereche=" + pereche +
+            '}';
     }
 }

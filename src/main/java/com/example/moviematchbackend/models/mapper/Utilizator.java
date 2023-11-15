@@ -1,10 +1,12 @@
 package com.example.moviematchbackend.models.mapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "utilizator")
@@ -12,7 +14,7 @@ public class Utilizator implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUtilizator")
+    @Column(name = "id_utilizator")
     private Long idUtilizator;
 
     @Column(name = "nume")
@@ -24,34 +26,34 @@ public class Utilizator implements Serializable {
     @Column(name = "username")
     private String usernameUtilizator;
 
-    @Column(name = "parola")
-    private String parolaUtilizator;
+    @Column(name = "email")
+    private String emailUtilizator;
 
-    @Column(name = "varsta")
-    private Integer varstaUtilizator;
+    @JsonIgnoreProperties("utilizator")
+    @OneToMany(mappedBy = "utilizator", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pereche> pereche;
 
-    @Column(name = "oras")
-    private String orasUtilizator;
+    @JsonIgnoreProperties("prieteni")
+    @OneToMany(mappedBy = "prieteni", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Prietenie> prieteni;
 
     public Utilizator() {
     }
 
-    public Utilizator(Long idUtilizator, String numeUtilizator, String prenumeUtilizator, String usernameUtilizator, String parolaUtilizator, Integer varstaUtilizator, String orasUtilizator) {
+    public Utilizator(Long idUtilizator, String numeUtilizator, String prenumeUtilizator, String usernameUtilizator, String emailUtilizator) {
         this.idUtilizator = idUtilizator;
         this.numeUtilizator = numeUtilizator;
         this.prenumeUtilizator = prenumeUtilizator;
         this.usernameUtilizator = usernameUtilizator;
-        this.parolaUtilizator = parolaUtilizator;
-        this.varstaUtilizator = varstaUtilizator;
-        this.orasUtilizator = orasUtilizator;
-    }
-
-    public Long getIdUtilizator() {
-        return idUtilizator;
+        this.emailUtilizator = emailUtilizator;
     }
 
     public void setIdUtilizator(Long idUtilizator) {
         this.idUtilizator = idUtilizator;
+    }
+
+    public Long getIdUtilizator() {
+        return idUtilizator;
     }
 
     public String getNumeUtilizator() {
@@ -78,27 +80,27 @@ public class Utilizator implements Serializable {
         this.usernameUtilizator = usernameUtilizator;
     }
 
-    public String getParolaUtilizator() {
-        return parolaUtilizator;
+    public String getEmailUtilizator() {
+        return emailUtilizator;
     }
 
-    public void setParolaUtilizator(String parolaUtilizator) {
-        this.parolaUtilizator = parolaUtilizator;
+    public void setEmailUtilizator(String emailUtilizator) {
+        this.emailUtilizator = emailUtilizator;
     }
 
-    public Integer getVarstaUtilizator() {
-        return varstaUtilizator;
+    public List<Pereche> getPereche() {
+        return pereche;
     }
 
-    public void setVarstaUtilizator(Integer varstaUtilizator) {
-        this.varstaUtilizator = varstaUtilizator;
+    public void setPereche(List<Pereche> pereche) {
+        this.pereche = pereche;
     }
 
-    public String getOrasUtilizator() {
-        return orasUtilizator;
+    public List<Prietenie> getPrieteni() {
+        return prieteni;
     }
 
-    public void setOrasUtilizator(String orasUtilizator) {
-        this.orasUtilizator = orasUtilizator;
+    public void setPrieteni(List<Prietenie> prieteni) {
+        this.prieteni = prieteni;
     }
 }
