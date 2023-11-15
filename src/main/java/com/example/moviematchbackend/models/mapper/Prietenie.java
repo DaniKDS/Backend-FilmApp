@@ -13,38 +13,46 @@ public class Prietenie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_prietenie;
+    @Column(name = "id_prietenie")
+    private Long idPrietenie;
 
     @Column(name = "id_utilizator1")
-    private Long id_utilizator1;
+    private Long idUtilizator1;
 
     @Column(name = "id_utilizator2")
-    private Long id_utilizator2;
+    private Long idUtilizator2;
 
     public Prietenie() {
     }
 
-    public Long getId_prietenie() {
-        return id_prietenie;
+    public Prietenie(Long idPrietenie, Long idUtilizator1, Long idUtilizator2) {
+        this.idPrietenie = idPrietenie;
+        this.idUtilizator1 = idUtilizator1;
+        this.idUtilizator2 = idUtilizator2;
     }
 
-    public void setId_prietenie(Long id_prietenie) {
-        this.id_prietenie = id_prietenie;
+    public Long getIdPrietenie() {
+        return idPrietenie;
     }
 
-    public Long getId_utilizator1() {
-        return id_utilizator1;
+    public void setIdPrietenie(Long idPrietenie) {
+        this.idPrietenie = idPrietenie;
     }
 
-    public void setId_utilizator1(Long id_utilizator1) {
-        this.id_utilizator1 = id_utilizator1;
+    public Long getIdUtilizator1() {
+        return idUtilizator1;
     }
 
-    public Long getId_utilizator2() {
-        return id_utilizator2;
+    public void setIdUtilizator1(Long idUtilizator1) {
+        this.idUtilizator1 = idUtilizator1;
     }
 
-    public void setId_utilizator2(Long id_utilizator2) {
-        this.id_utilizator2 = id_utilizator2;
+    public Long getIdUtilizator2() {
+        return idUtilizator2;
     }
+
+    public void setIdUtilizator2(Long idUtilizator2) {
+        this.idUtilizator2 = idUtilizator2;
+    }
+
 }

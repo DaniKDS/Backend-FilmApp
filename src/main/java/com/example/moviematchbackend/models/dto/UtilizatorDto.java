@@ -1,47 +1,27 @@
-package com.example.moviematchbackend.models.mapper;
+package com.example.moviematchbackend.models.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.*;
+public class UtilizatorDto {
 
-import java.io.Serializable;
 
-@Entity
-@Table(name = "utilizator")
-public class Utilizator implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUtilizator")
     private Long idUtilizator;
-
-    @Column(name = "nume")
     private String numeUtilizator;
 
-    @Column(name = "prenume")
     private String prenumeUtilizator;
+    private String parola;
 
-    @Column(name = "username")
-    private String usernameUtilizator;
-
-    @Column(name = "parola")
-    private String parolaUtilizator;
-
-    @Column(name = "varsta")
     private Integer varstaUtilizator;
 
-    @Column(name = "oras")
     private String orasUtilizator;
 
-    public Utilizator() {
+
+    public UtilizatorDto() {
     }
 
-    public Utilizator(Long idUtilizator, String numeUtilizator, String prenumeUtilizator, String usernameUtilizator, String parolaUtilizator, Integer varstaUtilizator, String orasUtilizator) {
+    public UtilizatorDto(Long idUtilizator, String numeUtilizator, String prenumeUtilizator, String parola, Integer varstaUtilizator, String orasUtilizator) {
         this.idUtilizator = idUtilizator;
         this.numeUtilizator = numeUtilizator;
         this.prenumeUtilizator = prenumeUtilizator;
-        this.usernameUtilizator = usernameUtilizator;
-        this.parolaUtilizator = parolaUtilizator;
+        this.parola = parola;
         this.varstaUtilizator = varstaUtilizator;
         this.orasUtilizator = orasUtilizator;
     }
@@ -70,20 +50,12 @@ public class Utilizator implements Serializable {
         this.prenumeUtilizator = prenumeUtilizator;
     }
 
-    public String getUsernameUtilizator() {
-        return usernameUtilizator;
+    public String getParola() {
+        return parola;
     }
 
-    public void setUsernameUtilizator(String usernameUtilizator) {
-        this.usernameUtilizator = usernameUtilizator;
-    }
-
-    public String getParolaUtilizator() {
-        return parolaUtilizator;
-    }
-
-    public void setParolaUtilizator(String parolaUtilizator) {
-        this.parolaUtilizator = parolaUtilizator;
+    public void setParola(String parola) {
+        this.parola = parola;
     }
 
     public Integer getVarstaUtilizator() {

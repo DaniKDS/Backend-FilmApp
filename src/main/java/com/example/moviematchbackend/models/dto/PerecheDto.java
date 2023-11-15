@@ -1,27 +1,17 @@
-package com.example.moviematchbackend.models.mapper;
+package com.example.moviematchbackend.models.dto;
 
-import jakarta.persistence.*;
+public class PerecheDto {
 
-import java.io.Serializable;
-
-@Entity
-@Table(name = "pereche")
-public class Pereche implements Serializable{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPereche;
 
-    @Column(name = "id_film")
     private Long idFilm;
 
-    @Column(name = "id_utilizator")
     private Long idUtilizator;
 
-    public Pereche() {
+    public PerecheDto() {
     }
 
-    public Pereche(Long idPereche, Long idFilm, Long idUtilizator) {
+    public PerecheDto(Long idPereche, Long idFilm, Long idUtilizator) {
         this.idPereche = idPereche;
         this.idFilm = idFilm;
         this.idUtilizator = idUtilizator;

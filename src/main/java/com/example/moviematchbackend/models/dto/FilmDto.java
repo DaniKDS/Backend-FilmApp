@@ -12,62 +12,70 @@ package com.example.moviematchbackend.models.dto;
 
 public class FilmDto {
 
-    private Long id_film;
-    private String titlu;
-    private String gen;
-    private int durata;
-    private String descriere;
-    private int an;
+    private Long idFilm;
+    private String titluFilm;
+    private String genFilm;
+    private int durataFilm;
+    private String descriereFilm;
+    private int anFilm;
 
     public FilmDto() {
     }
 
-    public Long getId_film() {
-        return id_film;
+    public FilmDto(Long idFilm, String titluFilm, String genFilm, int durataFilm, String descriereFilm, int anFilm) {
+        this.idFilm = idFilm;
+        this.titluFilm = titluFilm;
+        this.genFilm = genFilm;
+        this.durataFilm = durataFilm;
+        this.descriereFilm = descriereFilm;
+        this.anFilm = anFilm;
     }
 
-    public void setId_film(Long id_film) {
-        this.id_film = id_film;
+    public Long getIdFilm() {
+        return idFilm;
     }
 
-    public String getTitlu() {
-        return titlu;
+    public void setIdFilm(Long idFilm) {
+        this.idFilm = idFilm;
     }
 
-    public void setTitlu(String titlu) {
-        this.titlu = titlu;
+    public String getTitluFilm() {
+        return titluFilm;
     }
 
-    public String getGen() {
-        return gen;
+    public void setTitluFilm(String titluFilm) {
+        this.titluFilm = titluFilm;
     }
 
-    public void setGen(String gen) {
-        this.gen = gen;
+    public String getGenFilm() {
+        return genFilm;
     }
 
-    public int getDurata() {
-        return durata;
+    public void setGenFilm(String genFilm) {
+        this.genFilm = genFilm;
     }
 
-    public void setDurata(int durata) {
-        this.durata = durata;
+    public int getDurataFilm() {
+        return durataFilm;
     }
 
-    public String getDescriere() {
-        return descriere;
+    public void setDurataFilm(int durataFilm) {
+        this.durataFilm = durataFilm;
     }
 
-    public void setDescriere(String descriere) {
-        this.descriere = descriere;
+    public String getDescriereFilm() {
+        return descriereFilm;
     }
 
-    public int getAn() {
-        return an;
+    public void setDescriereFilm(String descriereFilm) {
+        this.descriereFilm = descriereFilm;
     }
 
-    public void setAn(int an) {
-        this.an = an;
+    public int getAnFilm() {
+        return anFilm;
     }
 
+    public void setAnFilm(int anFilm) {
+        this.anFilm = anFilm;
+    }
 }

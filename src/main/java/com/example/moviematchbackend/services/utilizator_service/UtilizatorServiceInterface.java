@@ -9,10 +9,10 @@ public interface UtilizatorServiceInterface {
     List<Utilizator> getAllUtilizatori();
     // aceasta metoda va fi folosita pentru a returna toti utilizatorii din baza de date
 
-    Utilizator getUtilizatorById(Long utilizatorId);
+    Utilizator getUtilizatorById(Long idUtilizator);
     // aceasta metoda va fi folosita pentru a returna un utilizator dupa id-ul sau (daca exista)
 
-    Utilizator getUtilizatorByUsername(String username);
+    Utilizator getUtilizatorByUsername(String usernameUtilizator);
     // aceasta metoda va fi folosita pentru a returna un utilizator dupa username-ul sau (daca exista)
 
     Utilizator saveUtilizator(Utilizator utilizator);

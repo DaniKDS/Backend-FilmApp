@@ -16,9 +16,8 @@ public class Film implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_film;
-    @Column(name = "nume_film")
-    private String numeFilm;
+    @Column(name = "id_film")
+    private Long idFilm;
 
     @Column(name = "titlu_film")
     private String titluFilm;
@@ -38,20 +37,21 @@ public class Film implements Serializable {
     public Film() {
     }
 
-    public Long getId_film() {
-        return id_film;
+    public Film(Long idFilm, String titluFilm, String genFilm, int durataFilm, String descriereFilm, int anFilm) {
+        this.idFilm = idFilm;
+        this.titluFilm = titluFilm;
+        this.genFilm = genFilm;
+        this.durataFilm = durataFilm;
+        this.descriereFilm = descriereFilm;
+        this.anFilm = anFilm;
     }
 
-    public void setId_film(Long id_film) {
-        this.id_film = id_film;
+    public Long getIdFilm() {
+        return idFilm;
     }
 
-    public String getNumeFilm() {
-        return numeFilm;
-    }
-
-    public void setNumeFilm(String numeFilm) {
-        this.numeFilm = numeFilm;
+    public void setIdFilm(Long idFilm) {
+        this.idFilm = idFilm;
     }
 
     public String getTitluFilm() {
