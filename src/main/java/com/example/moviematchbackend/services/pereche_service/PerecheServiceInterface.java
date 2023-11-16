@@ -5,7 +5,7 @@ import com.example.moviematchbackend.models.mapper.Pereche;
 import com.example.moviematchbackend.models.mapper.Utilizator;
 
 import java.util.List;
-
+//aceasta interfata este folosita pentru a apela metodele din clasa PerecheService
 public interface PerecheServiceInterface {
 
     Pereche getPerecheById(Long idPereche);

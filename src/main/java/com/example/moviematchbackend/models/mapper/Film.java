@@ -9,14 +9,16 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+//aceasta adnotare este folosita pentru a marca o clasa ca o entitate JPA
 @Table(name = "film")
+//aceasta adnotare este folosita pentru a specifica numele tabelei din baza de date
 public class Film implements Serializable {
-
+    //aceasta clasa este folosita pentru a crea un obiect de tip film
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_film")
     private Long idFilm;
-
+    //aceasta adnotare este folosita pentru a specifica ca atributul este cheie primara
     @Column(name = "titlu")
     private String titluFilm;
 
@@ -28,13 +30,11 @@ public class Film implements Serializable {
 
     @Column(name = "descriere")
     private String descriereFilm;
-
+    //aceasta adnotare este folosita pentru a specifica numele coloanei din baza de date
     @JsonIgnore
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pereche> pereche;
-
-
-
+    //aceasta adnotare este folosita pentru a specifica relatia dintre tabele
     @Column(name = "imagine_film", length = 1000000)
     private byte[] imagineFilm;
 

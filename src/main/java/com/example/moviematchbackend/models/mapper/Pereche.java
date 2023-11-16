@@ -3,23 +3,23 @@ package com.example.moviematchbackend.models.mapper;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-
+//aceasta clasa este o clasa de legatura intre clasa Utilizator si clasa Film
 @Entity
 @Table(name = "pereche")
 public class Pereche implements Serializable {
-
+    //aceasta clasa este folosita pentru a crea un obiect de tip pereche
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPereche;
-
+    //aceasta adnotare este folosita pentru a specifica ca atributul este cheie primara
     @ManyToOne
     @JoinColumn(name = "id_film")
     private Film film;
-
+    //aceasta adnotare este folosita pentru a specifica relatia dintre tabele
     @ManyToOne
     @JoinColumn(name = "id_utilizator")
     private Utilizator utilizator;
-
+    //aceasta adnotare este folosita pentru a specifica relatia dintre tabele
     public Pereche() {
     }
 

@@ -15,6 +15,8 @@ import java.util.Optional;
 // În interfața PerecheRepository
 public interface PerecheRepository extends JpaRepository<Pereche, Long> {
 //    Optional<Pereche> findFirstPerecheByUtilizatorId(Long idUtilizator);
+    //acea metoda care imi returneaza o pereche dupa idUtilizator
     Pereche getPerecheByIdPereche(Long idPereche);
+    //acea metoda care imi returneaza o pereche dupa idPereche
 
 }

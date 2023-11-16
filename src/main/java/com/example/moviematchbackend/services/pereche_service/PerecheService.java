@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//acea clasa care imi face legatura dintre frontend si backend
 @Service
 
 public class PerecheService implements PerecheServiceInterface{
 
     //@Autowired
     private PerecheRepository perecheRepository;
-
+    //acest constructor este folosit pentru a crea un obiect de tip PerecheService
     public PerecheService(PerecheRepository perecheRepository) {
         this.perecheRepository = perecheRepository;
     }
 
-
+    //acesta metoda imi returneaza o pereche dupa id in format json
     @Override
     public Pereche getPerecheById(Long id) {
         return this.perecheRepository.getPerecheByIdPereche(id);
     }
-
+    //acesta metoda imi returneaza o pereche dupa id in format json
     @Override
     public List<Pereche> getAllPereche() {
         List<Pereche> listOfPereche = new ArrayList<>();
@@ -34,12 +34,13 @@ public class PerecheService implements PerecheServiceInterface{
         return listOfPereche;
 
     }
+    //acesta metoda imi returneaza toate perechile din baza de date in format json
 
     @Override
     public void deletePereche(Pereche pereche) {
         this.perecheRepository.delete(pereche);
     }
-
+    //acesta metoda imi sterge o pereche din baza de date
     @Override
     public void savePereche(Utilizator utilizator, Film film) {
         Pereche pereche = new Pereche(utilizator, film);
