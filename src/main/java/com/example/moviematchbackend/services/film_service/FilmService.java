@@ -2,6 +2,7 @@ package com.example.moviematchbackend.services.film_service;
 
 import com.example.moviematchbackend.models.mapper.Film;
 import com.example.moviematchbackend.repositories.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ import java.util.List;
 public class FilmService implements FilmServiceInterface{
 
     private FilmRepository filmRepository;
+
+    @Autowired
+    public FilmService(FilmRepository filmRepository) {
+        this.filmRepository = filmRepository;
+    }
 
     @Override
     public List<Film> getAllFilme() {
@@ -30,7 +36,6 @@ public class FilmService implements FilmServiceInterface{
         this.filmRepository.delete(film);
 
     }
-
     @Override
     public Film getFilmByIdFilm(Long id) {
         return this.filmRepository.getFilmByIdFilm(id);

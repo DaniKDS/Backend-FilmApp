@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface UtilizatorRepository extends CrudRepository<Utilizator, Long> {
     Utilizator getUtilizatorByIdUtilizator(Long idUtilizator);
     //Aceasta functie returneaza utilizatorul cu id-ul idUtilizator (daca exista)
+
     Utilizator getUtilizatorByUsernameUtilizator(String numeUtilizator);
-    //Aceasta functie returneaza utilizatorul cu username-ul numeUtilizator (daca exista)
 
 
 }

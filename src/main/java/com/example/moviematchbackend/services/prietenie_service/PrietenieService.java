@@ -2,7 +2,6 @@ package com.example.moviematchbackend.services.prietenie_service;
 
 import com.example.moviematchbackend.models.mapper.Prietenie;
 import com.example.moviematchbackend.repositories.PrietenieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +26,8 @@ public class PrietenieService implements PrietenieServiceInterface {
     }
 
     @Override
-    public Prietenie getPrietenieById(Long id) {
-        return this.prietenieRepository.getPrietenieByIdPrietenie(id);
+    public Prietenie getPrietenieById(Long idPrietenie) {
+        return this.prietenieRepository.getPrietenieByIdPrietenie(idPrietenie);
     }
 
     @Override

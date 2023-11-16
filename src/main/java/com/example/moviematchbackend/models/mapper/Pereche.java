@@ -29,6 +29,11 @@ public class Pereche implements Serializable {
         this.utilizator = utilizator;
     }
 
+    public Pereche(Utilizator utilizator, Film film) {  //constructor pentru a crea o pereche
+        this.film = film;
+        this.utilizator = utilizator;
+    }
+
     public Long getIdPereche() {
         return idPereche;
     }

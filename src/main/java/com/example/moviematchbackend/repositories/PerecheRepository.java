@@ -1,17 +1,20 @@
 package com.example.moviematchbackend.repositories;
 
+import com.example.moviematchbackend.models.mapper.Film;
 import com.example.moviematchbackend.models.mapper.Pereche;
 import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Repository
-public interface PerecheRepository extends CrudRepository<Pereche, Long> {
-
-    Pereche getPerecheByIdPereche(Long id);
-
-//    Object getPerecheByIdUtilizator(Long idUtilizator);
-//    Aceasta functie returneaza perechea cu id-ul idPereche
+// În interfața PerecheRepository
+public interface PerecheRepository extends JpaRepository<Pereche, Long> {
+//    Optional<Pereche> findFirstPerecheByUtilizatorId(Long idUtilizator);
+    Pereche getPerecheByIdPereche(Long idPereche);
 
 }
