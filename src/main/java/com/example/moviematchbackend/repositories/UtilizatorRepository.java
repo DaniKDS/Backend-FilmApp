@@ -11,5 +11,8 @@ public interface UtilizatorRepository extends CrudRepository<Utilizator, Long> {
     Utilizator getUtilizatorByUsernameUtilizator(String numeUtilizator);
     //Aceasta functie returneaza utilizatorul cu username-ul numeUtilizator (daca exista)
 
+    Utilizator getUtilizatorByEmail(String email);
+    //Aceasta functie returneaza utilizatorul cu username-ul numeUtilizator (daca exista)
+
 
 }

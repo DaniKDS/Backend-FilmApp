@@ -12,6 +12,8 @@ public interface UtilizatorServiceInterface {
     Utilizator getUtilizatorById(Long idUtilizator);
     // aceasta metoda va fi folosita pentru a returna un utilizator dupa id-ul sau (daca exista)
 
+    Utilizator getUtilizatorByEmail(String email);
+
     Utilizator getUtilizatorByUsername(String usernameUtilizator);
     // aceasta metoda va fi folosita pentru a returna un utilizator dupa username-ul sau (daca exista)
 

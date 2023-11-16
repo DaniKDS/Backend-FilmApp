@@ -30,6 +30,10 @@ public class UtilizatorService implements UtilizatorServiceInterface{
     }
 
     @Override
+    public Utilizator getUtilizatorByEmail(String email) {
+        return this.utilizatorRepository.getUtilizatorByEmail(email);
+    }
+    @Override
     public Utilizator getUtilizatorByUsername(String usernameUtilizator) {
         return this.utilizatorRepository.getUtilizatorByUsernameUtilizator(usernameUtilizator);
     }
