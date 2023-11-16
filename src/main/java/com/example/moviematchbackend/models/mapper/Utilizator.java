@@ -8,24 +8,25 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+//aceasta clasa este folosita pentru a crea un obiect de tip film
 @Entity
 @Table(name = "utilizator")
 public class Utilizator implements Serializable {
-
+    //aceasta clasa este folosita pentru a crea un obiect de tip utilizator
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_utilizator")
     private Long idUtilizator;
-
+    //aceasta adnotare este folosita pentru a specifica ca atributul este cheie primara
     @Column(name = "nume")
     private String numeUtilizator;
-
+    //aceasta adnotare este folosita pentru a specifica numele coloanei din baza de date
     @Column(name = "prenume")
     private String prenumeUtilizator;
-
+    //aceasta adnotare este folosita pentru a specifica numele coloanei din baza de date
     @Column(name = "username")
     private String usernameUtilizator;
-
+    //aceasta adnotare este folosita pentru a specifica numele coloanei din baza de date
     @Column(name = "email")
     private String emailUtilizator;
 

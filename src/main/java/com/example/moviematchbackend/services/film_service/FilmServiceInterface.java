@@ -2,7 +2,7 @@ package com.example.moviematchbackend.services.film_service;
 import com.example.moviematchbackend.models.mapper.Film;
 
 import java.util.List;
-
+//aceasta interfata este folosita pentru a apela metodele din clasa FilmService
 public interface FilmServiceInterface {
 
     List<Film> getAllFilme();
