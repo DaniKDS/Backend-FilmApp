@@ -10,7 +10,4 @@ public interface PrietenieRepository extends CrudRepository<Prietenie, Long> {
 
     Prietenie getPrietenieByIdPrietenie(Long idPrietenie);
     //Aceasta functie returneaza prietenia cu id-ul idPrietenie
-
-    Prietenie findByUtilizator1_IdUtilizatorAndUtilizator2_IdUtilizator(Long idUtilizator1, Long idUtilizator2);
-
 }

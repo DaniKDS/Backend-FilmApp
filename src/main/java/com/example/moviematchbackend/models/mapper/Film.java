@@ -1,5 +1,6 @@
 package com.example.moviematchbackend.models.mapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,9 +29,11 @@ public class Film implements Serializable {
     @Column(name = "descriere")
     private String descriereFilm;
 
-    @JsonIgnoreProperties("film") // Update this line to reference the field in the Pereche class
+    @JsonIgnore
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pereche> pereche;
+
+
 
     @Column(name = "imagine_film", length = 1000000)
     private byte[] imagineFilm;

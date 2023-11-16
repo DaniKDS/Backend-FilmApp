@@ -29,9 +29,9 @@ public class Utilizator implements Serializable {
     @Column(name = "email")
     private String emailUtilizator;
 
-    @JsonIgnoreProperties("utilizator")
-    @OneToMany(mappedBy = "utilizator", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pereche> pereche;
+//    @JsonIgnoreProperties("utilizator")
+//    @OneToMany(mappedBy = "utilizator", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Pereche> pereche;
 
 //    @JsonIgnoreProperties("prieteni")
 //    @OneToMany(mappedBy = "prieteni", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -86,13 +86,5 @@ public class Utilizator implements Serializable {
 
     public void setEmailUtilizator(String emailUtilizator) {
         this.emailUtilizator = emailUtilizator;
-    }
-
-    public List<Pereche> getPereche() {
-        return pereche;
-    }
-
-    public void setPereche(List<Pereche> pereche) {
-        this.pereche = pereche;
     }
 }

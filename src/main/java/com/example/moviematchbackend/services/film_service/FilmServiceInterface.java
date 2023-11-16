@@ -15,6 +15,7 @@ public interface FilmServiceInterface {
     //Aceasta functie sterge un film din baza de date
 
     Film getFilmByIdFilm(Long id);
+    //Aceasta functie returneaza un film din baza de date dupa id-ul sau
 
     Film getFilmByTitluFilm(String titlu);
     //Aceasta functie returneaza un film din baza de date dupa id-ul sau

@@ -5,6 +5,7 @@ import com.example.moviematchbackend.models.mapper.Utilizator;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,13 +24,13 @@ public class UtilizatorController {
         return this.utilizatorService.getAllUtilizatori();
     }
 
-    @GetMapping("/api/utilizatori/{id}")
-    public Utilizator getUtilizatorById(Long id) {
+    @GetMapping("/api/utilizatori/id/{id}")
+    public Utilizator getUtilizatorById(@PathVariable Long id) {
         return this.utilizatorService.getUtilizatorById(id);
     }
 
-    @GetMapping("/api/utilizatori/{username}")
-    public Utilizator getUtilizatorByUsername(String username) {
+    @GetMapping("/api/utilizatori/username/{username}")
+    public Utilizator getUtilizatorByUsername(@PathVariable String username) {
         return this.utilizatorService.getUtilizatorByUsername(username);
     }
 

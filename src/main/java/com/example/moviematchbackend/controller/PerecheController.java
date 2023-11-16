@@ -1,12 +1,15 @@
 package com.example.moviematchbackend.controller;
 
 
+import com.example.moviematchbackend.models.mapper.Film;
+import com.example.moviematchbackend.models.mapper.Pereche;
+import com.example.moviematchbackend.models.mapper.Utilizator;
 import com.example.moviematchbackend.services.pereche_service.PerecheService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.PipedWriter;
+import java.util.List;
 
 @RestController
 public class PerecheController {
@@ -17,29 +20,23 @@ public class PerecheController {
         this.perecheService = perecheService;
     }
     @GetMapping("/api/perechi")
-    public String getPerechi() {
-        return this.perecheService.getAllPereche().toString();
+    public List<Pereche> getPerechi() {
+        return this.perecheService.getAllPereche();
 
     }
     @GetMapping("/api/perechi/{id}")
-    public String getPerecheById(Long id) {
-        return this.perecheService.getPerecheById(id).toString();
+    public Pereche getPerecheById(@PathVariable Long id) {
+        return perecheService.getPerecheById(id);
     }
 
-//    @GetMapping("/api/perechi/{id_utilizator}")
-//    public String getPerecheByIdUtilizator(Long id_utilizator) {
-//        return this.perecheService.getPerecheByIdUtilizator(id_utilizator).toString();
+//    @GetMapping("/api/perechi/utilizator/{idUtilizator}")
+//    public Pereche getPerecheByIdUtilizator(@PathVariable Long idUtilizator) {
+//        return perecheService.getPerecheByIdUtilizator(idUtilizator);
 //    }
 
-    @DeleteMapping("/api/perechi/{id}")
-    public void deletePereche(Long id) {
-        this.perecheService.deletePereche(this.perecheService.getPerecheById(id));
-    }
-
-    @PostMapping("/api/perechi")
-    public void addPereche(Long id_utilizator, Long id_film) {
-        this.perecheService.savePereche(this.perecheService.getPerecheById(id_utilizator));
-    }
-
+//    @PostMapping("/api/perechi")
+//    public void addPereche(@RequestBody Utilizator utilizator, Film film) {
+//        this.perecheService.savePereche( utilizator, film);
+//    }
 
 }
