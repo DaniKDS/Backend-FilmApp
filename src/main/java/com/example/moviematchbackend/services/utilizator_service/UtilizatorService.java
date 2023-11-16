@@ -35,6 +35,10 @@ public class UtilizatorService implements UtilizatorServiceInterface{
     //acesta metoda imi returneaza un utilizator dupa id in format json
 
     @Override
+    public Utilizator getUtilizatorByEmail(String email) {
+        return this.utilizatorRepository.getUtilizatorByEmail(email);
+    }
+    @Override
     public Utilizator getUtilizatorByUsername(String usernameUtilizator) {
         return this.utilizatorRepository.getUtilizatorByUsernameUtilizator(usernameUtilizator);
     }
