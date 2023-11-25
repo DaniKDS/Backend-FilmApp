@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.services.film_service;
 
-import com.example.moviematchbackend.models.mapper.Film;
+import com.example.moviematchbackend.models.entity.Film;
 import com.example.moviematchbackend.repositories.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +42,10 @@ public class FilmService implements FilmServiceInterface{
     public Film getFilmByIdFilm(Long id) {
         return this.filmRepository.getFilmByIdFilm(id);
     }
-    //acesta metoda imi returneaza un film dupa id in format json
+
     @Override
-    public Film getFilmByTitluFilm(String titlu) {
-        return this.filmRepository.getFilmByTitluFilm(titlu);
+    public Film getFilmByTitlu(String titlu) {
+        return this.filmRepository.getFilmByTitlu(titlu);
     }
+
 }

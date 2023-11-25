@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.services.prietenie_service;
 
-import com.example.moviematchbackend.models.mapper.Prietenie;
+import com.example.moviematchbackend.models.entity.Prietenie;
 import com.example.moviematchbackend.repositories.PrietenieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

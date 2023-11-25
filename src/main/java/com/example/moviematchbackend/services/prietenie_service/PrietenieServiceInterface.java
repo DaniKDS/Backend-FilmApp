@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.services.prietenie_service;
 
-import com.example.moviematchbackend.models.mapper.Prietenie;
+import com.example.moviematchbackend.models.entity.Prietenie;
 
 import java.util.List;
 //aceasta interfata este folosita pentru a apela metodele din clasa PrietenieService

@@ -1,7 +1,7 @@
 package com.example.moviematchbackend.controller;
 
 
-import com.example.moviematchbackend.models.mapper.Utilizator;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

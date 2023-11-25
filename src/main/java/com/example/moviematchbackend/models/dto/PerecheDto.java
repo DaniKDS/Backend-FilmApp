@@ -1,44 +1,14 @@
 package com.example.moviematchbackend.models.dto;
 
+import com.example.moviematchbackend.models.entity.Film;
+import lombok.Builder;
+
+// Această clasă este folosită pentru a transfera datele despre o pereche de filme din baza de date către frontend
+@Builder
 public class PerecheDto {
 
-    private Long idPereche;
+    private Film film1;
 
-    private Long idFilm;
-
-    private Long idUtilizator;
-
-    public PerecheDto() {
-    }
-
-    public PerecheDto(Long idPereche, Long idFilm, Long idUtilizator) {
-        this.idPereche = idPereche;
-        this.idFilm = idFilm;
-        this.idUtilizator = idUtilizator;
-    }
-
-    public Long getIdPereche() {
-        return idPereche;
-    }
-
-    public void setIdPereche(Long idPereche) {
-        this.idPereche = idPereche;
-    }
-
-    public Long getIdFilm() {
-        return idFilm;
-    }
-
-    public void setIdFilm(Long idFilm) {
-        this.idFilm = idFilm;
-    }
-
-    public Long getIdUtilizator() {
-        return idUtilizator;
-    }
-
-    public void setIdUtilizator(Long idUtilizator) {
-        this.idUtilizator = idUtilizator;
-    }
+    private Film film2;
 
 }

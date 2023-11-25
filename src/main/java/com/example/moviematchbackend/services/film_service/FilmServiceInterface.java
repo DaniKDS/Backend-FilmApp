@@ -1,5 +1,5 @@
 package com.example.moviematchbackend.services.film_service;
-import com.example.moviematchbackend.models.mapper.Film;
+import com.example.moviematchbackend.models.entity.Film;
 
 import java.util.List;
 //aceasta interfata este folosita pentru a apela metodele din clasa FilmService
@@ -17,7 +17,7 @@ public interface FilmServiceInterface {
     Film getFilmByIdFilm(Long id);
     //Aceasta functie returneaza un film din baza de date dupa id-ul sau
 
-    Film getFilmByTitluFilm(String titlu);
+    Film getFilmByTitlu(String titlu);
     //Aceasta functie returneaza un film din baza de date dupa id-ul sau
 
 }

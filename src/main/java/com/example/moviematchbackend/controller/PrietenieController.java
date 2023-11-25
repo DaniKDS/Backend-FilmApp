@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.controller;
 
-import com.example.moviematchbackend.models.mapper.Prietenie;
+import com.example.moviematchbackend.models.entity.Prietenie;
 import com.example.moviematchbackend.services.prietenie_service.PrietenieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,32 +1,14 @@
 package com.example.moviematchbackend.models.dto;
 
+import lombok.Builder;
+
+// Această clasă este folosită pentru a transfera datele despre o prietenie din baza de date către frontend
+@Builder
 public class PrietenieDto {
 
-    private Long idUtilizator1;
-    private Long idUtilizator2;
+    private UtilizatorDto utilizator1;
 
-    public PrietenieDto() {
-    }
+    private UtilizatorDto utilizator2;
 
-    public PrietenieDto(Long idUtilizator1, Long idUtilizator2) {
-        this.idUtilizator1 = idUtilizator1;
-        this.idUtilizator2 = idUtilizator2;
-    }
-
-    public Long getIdUtilizator1() {
-        return idUtilizator1;
-    }
-
-    public void setIdUtilizator1(Long idUtilizator1) {
-        this.idUtilizator1 = idUtilizator1;
-    }
-
-    public Long getIdUtilizator2() {
-        return idUtilizator2;
-    }
-
-    public void setIdUtilizator2(Long idUtilizator2) {
-        this.idUtilizator2 = idUtilizator2;
-    }
 
 }

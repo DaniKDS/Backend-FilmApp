@@ -1,10 +1,9 @@
 package com.example.moviematchbackend.services.pereche_service;
 
-import com.example.moviematchbackend.models.mapper.Film;
-import com.example.moviematchbackend.models.mapper.Pereche;
-import com.example.moviematchbackend.models.mapper.Utilizator;
+import com.example.moviematchbackend.models.entity.Film;
+import com.example.moviematchbackend.models.entity.Pereche;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.PerecheRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
