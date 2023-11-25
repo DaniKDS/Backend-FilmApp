@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.services.utilizator_service;
 
-import com.example.moviematchbackend.models.mapper.Utilizator;
+import com.example.moviematchbackend.models.entity.Utilizator;
 
 import java.util.List;
 //aceasta interfata este folosita pentru a apela metodele din clasa UtilizatorService

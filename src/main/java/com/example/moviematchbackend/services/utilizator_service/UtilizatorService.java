@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.services.utilizator_service;
 
-import com.example.moviematchbackend.models.mapper.Utilizator;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.UtilizatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
