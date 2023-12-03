@@ -39,6 +39,18 @@ public class FilmController {
         return filmMapper.filmToFilmDto(film);
     }
 
+    @GetMapping("/api/filme/gen/{gen}")
+    public List<FilmDto> getFilmeByGen(@PathVariable String gen) {
+        List<Film> filme = filmService.getFilmeByGen(gen);
+        return filmMapper.filmeToFilmDtoList(filme);
+    }
+
+    @GetMapping("/api/filme/locatie/{locatieFilmare}")
+    public List<FilmDto> getFilmeByLocatieFilmare(@PathVariable String locatieFilmare) {
+        List<Film> filme = filmService.getFilmeByLocatieFilmare(locatieFilmare);
+        return filmMapper.filmeToFilmDtoList(filme);
+    }
+
     @PostMapping("/api/filme")
     public FilmDto addFilm(@RequestBody FilmDto filmDto) {
         Film film = filmMapper.filmDtoToFilm(filmDto);
