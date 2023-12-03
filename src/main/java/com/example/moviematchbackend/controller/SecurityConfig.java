@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.controller;
 
-import com.example.moviematchbackend.models.mapper.Utilizator;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +48,7 @@ class LoginController {
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
     UtilizatorService utilizatorService;
 
     @Bean
@@ -63,7 +65,6 @@ public class SecurityConfig {
                         x.successHandler((request, response, authentication) -> {
                             DefaultOidcUser user = ((DefaultOidcUser) authentication.getPrincipal());
                             String email = user.getEmail();
-
                             if(utilizatorService.getUtilizatorByEmail(email) == null){
                                 Utilizator util = new Utilizator();
                                 util.setEmailUtilizator(email);
@@ -76,11 +77,14 @@ public class SecurityConfig {
                             response.sendRedirect("/");
 
                         });
-
                 }
-
                 )
-                .logout(withDefaults())
+                .logout(
+                        x -> {
+                            x.logoutSuccessUrl("/");
+                            x.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                        }
+                )
                 .build();
     }
 

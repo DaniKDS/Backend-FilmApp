@@ -1,6 +1,6 @@
 package com.example.moviematchbackend.repositories;
 
-import com.example.moviematchbackend.models.mapper.Utilizator;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ public interface UtilizatorRepository extends CrudRepository<Utilizator, Long> {
     Utilizator getUtilizatorByUsernameUtilizator(String numeUtilizator);
     //Aceasta functie returneaza utilizatorul cu username-ul numeUtilizator (daca exista)
 
-    Utilizator getUtilizatorByEmail(String email);
+    Utilizator getUtilizatorByEmailUtilizator(String email);
     //Aceasta functie returneaza utilizatorul cu username-ul numeUtilizator (daca exista)
 
 
