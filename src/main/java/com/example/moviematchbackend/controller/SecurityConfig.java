@@ -43,7 +43,6 @@ class LoginController {
 
 }
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
