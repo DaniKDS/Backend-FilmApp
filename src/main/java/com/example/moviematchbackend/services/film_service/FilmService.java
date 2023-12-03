@@ -48,4 +48,11 @@ public class FilmService implements FilmServiceInterface{
         return this.filmRepository.getFilmByTitlu(titlu);
     }
 
+    public List<Film> getFilmeByGen(String gen) {
+        return this.filmRepository.getFilmeByGen(gen);
+    }
+
+    public List<Film> getFilmeByLocatieFilmare(String locatieFilmare) {
+        return this.filmRepository.getFilmeByLocatieFilmare(locatieFilmare);
+    }
 }
