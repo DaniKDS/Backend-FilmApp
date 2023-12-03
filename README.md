@@ -16,12 +16,8 @@ Gasiti pe teams !!!
 
 
 
-
 pentru Butonul de login, sa foloseasca `<a href='/oauth2/authorization/google'></a>`
 pentru cel de logout, `<a href='/logout'></a>`
-
-
-trebuie adaugata logica pentru creating a new user 
 
 ca sa faci rost de date de la user, vezi modelul asta pentru rest controller
 
@@ -33,4 +29,4 @@ ca sa faci rost de date de la user, vezi modelul asta pentru rest controller
 ```
 
 
-mai trebuie facuta niste configuratie la rute
+mai trebuie facuta niste configuratie la rute (url pentru pagina de `/error`)
