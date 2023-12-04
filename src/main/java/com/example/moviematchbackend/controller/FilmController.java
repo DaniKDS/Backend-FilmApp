@@ -16,7 +16,6 @@ import java.util.List;
 public class FilmController {
 
 
-
     private final FilmService filmService;
     private final FilmMapper filmMapper;
 
@@ -61,7 +60,6 @@ public class FilmController {
         List<Film> filme = filmService.getFilmeByLocatieFilmare(locatieFilmare);
         return filmMapper.filmeToFilmDtoList(filme);
     }
-
 
     @PostMapping("/api/filme")
     public FilmDto addFilm(@RequestBody FilmDto filmDto) {
