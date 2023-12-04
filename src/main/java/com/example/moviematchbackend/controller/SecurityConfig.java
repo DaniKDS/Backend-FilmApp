@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -51,7 +52,7 @@ class LoginController {
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class  SecurityConfig {
 
     @Autowired
     UtilizatorService utilizatorService;
@@ -83,14 +84,19 @@ public class SecurityConfig {
 
                     });
                 }
-            )
-            .logout(
-                x -> {
-                    x.logoutSuccessUrl("/");
-                    x.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-                }
-            )
-            .build();
+                )
+                .csrf(
+                        x -> {
+                            x.disable();
+                        }
+                )
+                .logout(
+                        x -> {
+                            x.logoutSuccessUrl("/");
+                            x.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                        }
+                )
+                .build();
     }
 
 }

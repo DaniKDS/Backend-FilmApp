@@ -30,3 +30,6 @@ ca sa faci rost de date de la user, vezi modelul asta pentru rest controller
 
 
 mai trebuie facuta niste configuratie la rute (url pentru pagina de `/error`)
+
+la prietenie: in db poti sa ai prietenie intre utilizatorii 2, 3 dar nu si intre 3, 2 ceea ce inseamna ca prietenia e doar de o parte...
+e un pic dubios si nu foarte corect; rezolvare: creem automat la acceptarea unei cereri si prietenia inversa si o adaugam in baza de date?
