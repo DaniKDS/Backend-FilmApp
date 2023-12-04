@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+
 //acea clasa care imi face legatura dintre frontend si backend
 @Service
 public class FilmService implements FilmServiceInterface {
