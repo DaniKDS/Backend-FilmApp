@@ -7,10 +7,15 @@ import com.example.moviematchbackend.services.film_service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+//acea clasa care imi face legatura dintre frontend si backend
 
 @RestController
 public class FilmController {
+
+
 
     private final FilmService filmService;
     private final FilmMapper filmMapper;
@@ -20,6 +25,8 @@ public class FilmController {
         this.filmService = filmService;
         this.filmMapper = filmMapper;
     }
+
+    //acest constructor este folosit pentru a crea un obiect de tip FilmController
 
     @GetMapping("/api/filme")
     public List<FilmDto> getFilme() {
@@ -33,6 +40,8 @@ public class FilmController {
         return filmMapper.filmToFilmDto(film);
     }
 
+
+    //acest endpoint imi returneaza un film dupa id in format json
     @GetMapping("/api/filme/titlu/{titlu}")
     public FilmDto getFilmByTitlu(@PathVariable String titlu) {
         Film film = filmService.getFilmByTitlu(titlu);
@@ -45,11 +54,14 @@ public class FilmController {
         return filmMapper.filmeToFilmDtoList(filme);
     }
 
+    //acest endpoint imi returneaza un film dupa id in format json
+
     @GetMapping("/api/filme/locatie/{locatieFilmare}")
     public List<FilmDto> getFilmeByLocatieFilmare(@PathVariable String locatieFilmare) {
         List<Film> filme = filmService.getFilmeByLocatieFilmare(locatieFilmare);
         return filmMapper.filmeToFilmDtoList(filme);
     }
+
 
     @PostMapping("/api/filme")
     public FilmDto addFilm(@RequestBody FilmDto filmDto) {
@@ -58,8 +70,27 @@ public class FilmController {
         return filmMapper.filmToFilmDto(savedFilm);
     }
 
+    //acest endpoint imi adauga un film in baza de date
+
     @DeleteMapping("/api1/filme/{id}")
     public void deleteFilm(@PathVariable Long id) {
         this.filmService.deleteFilm(this.filmService.getFilmByIdFilm(id));
     }
+
+    //acest endpoint imi sterge un film din baza de date
+    @PostMapping("/api/listafilme")
+    public void addMovieToYourOwnList(@RequestBody Film film) {
+        this.filmService.addMovieToYourOwnList(film);
+    }
+
+    @DeleteMapping("/api1/filmelista/{id}")
+    public void deleteFilmFromFavouriteList(@PathVariable Long id) {
+        this.filmService.deleteFilmFromFavouriteList(id);
+    }
+
+    @GetMapping("/api/filmelista")
+    public List<Film> getFilmsFromFavouriteList() {
+        return this.filmService.getFilmsFromMyFavouriteList();
+    }
+
 }
