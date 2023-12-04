@@ -1,7 +1,9 @@
 package com.example.moviematchbackend.services.film_service;
+
 import com.example.moviematchbackend.models.entity.Film;
 
 import java.util.List;
+
 //aceasta interfata este folosita pentru a apela metodele din clasa FilmService
 public interface FilmServiceInterface {
 
@@ -19,5 +21,11 @@ public interface FilmServiceInterface {
 
     Film getFilmByTitlu(String titlu);
     //Aceasta functie returneaza un film din baza de date dupa id-ul sau
+
+    void addMovieToYourOwnList(Film film);
+
+    List<Film> getFilmsFromMyFavouriteList();
+
+    void deleteFilmFromFavouriteList(Long id);
 
 }
