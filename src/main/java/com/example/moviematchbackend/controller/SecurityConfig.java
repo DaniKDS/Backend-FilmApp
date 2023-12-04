@@ -50,7 +50,6 @@ class LoginController {
 
 }
 
-
 @Configuration
 @EnableWebSecurity
 public class  SecurityConfig {
@@ -61,29 +60,29 @@ public class  SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(auth -> {
-                    // astea sunt vizibile si fara sa fii logged in
-                    auth.requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll();
-                    auth.requestMatchers("/favicon.ico").permitAll();
-                    //toate celelalte nu sunt
-                    auth.anyRequest().authenticated();
-                })
-                .oauth2Login( x -> {
-                        x.successHandler((request, response, authentication) -> {
-                            DefaultOidcUser user = ((DefaultOidcUser) authentication.getPrincipal());
-                            String email = user.getEmail();
-                            if(utilizatorService.getUtilizatorByEmail(email) == null){
-                                Utilizator util = new Utilizator();
-                                util.setEmailUtilizator(email);
-                                util.setNumeUtilizator(user.getFamilyName());
-                                util.setPrenumeUtilizator(user.getGivenName());
-                                util.setUsernameUtilizator((user.getGivenName() + "_" + user.getFamilyName()).toLowerCase().replace('-', '_').replace(' ', '_'));
-                                utilizatorService.saveUtilizator(util);
-                            }
+            .authorizeHttpRequests(auth -> {
+                // astea sunt vizibile si fara sa fii logged in
+                auth.requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll();
+                auth.requestMatchers("/favicon.ico").permitAll();
+                //toate celelalte nu sunt
+                auth.anyRequest().authenticated();
+            })
+            .oauth2Login(x -> {
+                    x.successHandler((request, response, authentication) -> {
+                        DefaultOidcUser user = ((DefaultOidcUser) authentication.getPrincipal());
+                        String email = user.getEmail();
+                        if (utilizatorService.getUtilizatorByEmail(email) == null) {
+                            Utilizator util = new Utilizator();
+                            util.setEmailUtilizator(email);
+                            util.setNumeUtilizator(user.getFamilyName());
+                            util.setPrenumeUtilizator(user.getGivenName());
+                            util.setUsernameUtilizator((user.getGivenName() + "_" + user.getFamilyName()).toLowerCase().replace('-', '_').replace(' ', '_'));
+                            utilizatorService.saveUtilizator(util);
+                        }
 
-                            response.sendRedirect("/");
+                        response.sendRedirect("/");
 
-                        });
+                    });
                 }
                 )
                 .csrf(
@@ -101,3 +100,4 @@ public class  SecurityConfig {
     }
 
 }
+
