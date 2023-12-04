@@ -1,38 +1,49 @@
 package com.example.moviematchbackend.controller;
 
-
+import com.example.moviematchbackend.models.dto.UtilizatorDto;
 import com.example.moviematchbackend.models.entity.Utilizator;
+import com.example.moviematchbackend.models.mapper.UtilizatorMapper;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-//acea clasa care imi face legatura dintre frontend si backend
+
 @RestController
 public class UtilizatorController {
-    //acest obiect este folosit pentru a apela metodele din clasa UtilizatorService
-    private UtilizatorService utilizatorService;
-    //acest constructor este folosit pentru a crea un obiect de tip UtilizatorController
+
+    private final UtilizatorService utilizatorService;
+    private final UtilizatorMapper utilizatorMapper;
+
     @Autowired
-    public UtilizatorController(UtilizatorService utilizatorService) {
+    public UtilizatorController(UtilizatorService utilizatorService, UtilizatorMapper utilizatorMapper) {
         this.utilizatorService = utilizatorService;
-    }
-    //acest endpoint imi returneaza toti utilizatorii din baza de date in format json
-    @GetMapping("/api/utilizatori")
-    public List<Utilizator> getUtilizatori() {
-        return this.utilizatorService.getAllUtilizatori();
-    }
-    //acest endpoint imi returneaza un utilizator dupa id in format json
-    @GetMapping("/api/utilizatori/id/{id}")
-    public Utilizator getUtilizatorById(@PathVariable Long id) {
-        return this.utilizatorService.getUtilizatorById(id);
-    }
-    //acest endpoint imi returneaza un utilizator dupa username in format json
-    @GetMapping("/api/utilizatori/username/{username}")
-    public Utilizator getUtilizatorByUsername(@PathVariable String username) {
-        return this.utilizatorService.getUtilizatorByUsername(username);
+        this.utilizatorMapper = utilizatorMapper;
     }
 
+    @GetMapping("/api/utilizatori")
+    public List<UtilizatorDto> getUtilizatori() {
+        List<Utilizator> utilizatori = this.utilizatorService.getAllUtilizatori();
+        return utilizatorMapper.utilizatoriToUtilizatorDtoList(utilizatori);
+    }
+
+    @GetMapping("/api/utilizatori/id/{id}")
+    public UtilizatorDto getUtilizatorById(@PathVariable Long id) {
+        Utilizator utilizator = this.utilizatorService.getUtilizatorById(id);
+        return utilizatorMapper.utilizatorToUtilizatorDto(utilizator);
+    }
+
+    @GetMapping("/api/utilizatori/username/{username}")
+    public UtilizatorDto getUtilizatorByUsername(@PathVariable String username) {
+        Utilizator utilizator = this.utilizatorService.getUtilizatorByUsername(username);
+        return utilizatorMapper.utilizatorToUtilizatorDto(utilizator);
+    }
+
+    // Adaugă metoda pentru adăugarea unui utilizator
+    @PostMapping("/api/utilizatori")
+    public UtilizatorDto addUtilizator(@RequestBody UtilizatorDto utilizatorDto) {
+        Utilizator utilizator = utilizatorMapper.utilizatorDtoToUtilizator(utilizatorDto);
+        Utilizator savedUtilizator = this.utilizatorService.saveUtilizator(utilizator);
+        return utilizatorMapper.utilizatorToUtilizatorDto(savedUtilizator);
+    }
 }
