@@ -53,7 +53,7 @@ class LoginController {
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class  SecurityConfig {
 
     @Autowired
     UtilizatorService utilizatorService;
