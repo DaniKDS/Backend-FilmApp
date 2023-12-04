@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 public class FilmController {
-    private FilmService filmService;
+
 
 
     private final FilmService filmService;
