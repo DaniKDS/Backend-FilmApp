@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -39,6 +41,11 @@ class LoginController {
     @GetMapping("/test")
     public String getUser(Authentication userDetails) {
         return "User Details: " + ((DefaultOidcUser) userDetails.getPrincipal()).getEmail();
+    }
+
+    @GetMapping("/print_session")
+    public String print_session(@RequestHeader("Cookie") String session) {
+        return session.toString();
     }
 
 }
@@ -78,6 +85,11 @@ public class SecurityConfig {
 
                         });
                 }
+                )
+                .csrf(
+                        x -> {
+                            x.disable();
+                        }
                 )
                 .logout(
                         x -> {

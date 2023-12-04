@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.io.Serializable;
 
+
+
 @Entity
 @Table(name = "prietenie")
 @Data
@@ -15,7 +17,6 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Prietenie implements Serializable {
 
     @Id
@@ -31,6 +32,7 @@ public class Prietenie implements Serializable {
     @JoinColumn(name = "id_utilizator2", referencedColumnName = "id_utilizator", nullable = false)
     private Utilizator utilizator2;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_cerere")
-    private String statusCerere;
+    private StatusCerere statusCerere;
 }
