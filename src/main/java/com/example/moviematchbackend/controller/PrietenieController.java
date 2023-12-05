@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 //acea clasa care imi face legatura dintre frontend si backend
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class PrietenieController {
 
