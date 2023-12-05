@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,7 @@ import java.util.Iterator;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 //asta e o clasa de test, poate fi scoasa ulterior
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 class LoginController {
 
@@ -50,6 +52,7 @@ class LoginController {
 
 }
 
+@CrossOrigin(origins = "http://localhost:5173")
 @Configuration
 @EnableWebSecurity
 public class  SecurityConfig {
