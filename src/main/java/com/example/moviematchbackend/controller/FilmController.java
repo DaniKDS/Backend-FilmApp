@@ -17,6 +17,8 @@ import java.util.List;
 
 //acea clasa care imi face legatura dintre frontend si backend
 
+
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class FilmController {
 
