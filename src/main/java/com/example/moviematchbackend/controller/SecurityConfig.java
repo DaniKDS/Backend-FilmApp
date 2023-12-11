@@ -45,6 +45,7 @@ class LoginController {
     public String print_session(@RequestHeader("Cookie") String session) {
         return session;
     }
+
 }
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -96,4 +97,3 @@ public class  SecurityConfig {
     }
 
 }
-
