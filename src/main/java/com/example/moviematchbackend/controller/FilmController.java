@@ -5,6 +5,7 @@ import com.example.moviematchbackend.models.entity.Film;
 import com.example.moviematchbackend.models.entity.Prietenie;
 import com.example.moviematchbackend.models.entity.StatusCerere;
 import com.example.moviematchbackend.models.entity.Utilizator;
+import com.example.moviematchbackend.models.mapper.FilmMapper;
 import com.example.moviematchbackend.services.film_service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
