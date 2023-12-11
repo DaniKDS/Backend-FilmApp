@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,7 +35,7 @@ public class PrietenieController {
     }
     //acest constructor este folosit pentru a crea un obiect de tip PrietenieController
     @GetMapping("/api/prieteni")
-    public List<Prietenie> getPrieteni() {
+    public List<Prietenie> getPrietenii() {
         return this.prietenieService.getAllPrietenii();
     }
     //acest endpoint imi returneaza toate prieteniile din baza de date in format json
@@ -113,6 +114,20 @@ public class PrietenieController {
             }
         }
     }
+    @GetMapping("/api/afisare_prieteni")
+    public List<Utilizator> getFriendsOf(Authentication authentication){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        List<Prietenie> prietenii = prietenieService.getAllPrietenii();
+        List<Utilizator> prieteniOf = new ArrayList<>();
+        for(Prietenie pr: prietenii){
+            if(pr.getUtilizator1() == user_curent && pr.getStatusCerere() == StatusCerere.ACCEPTATA){
+                prieteniOf.add(pr.getUtilizator2());
+            }
+        }
+        return prieteniOf;
+    }
+
 
     @PostMapping("/api/stergere_prieten")
     public ResponseEntity<String> deleteFriend(Authentication authentication, @RequestBody Long id_prietenie){

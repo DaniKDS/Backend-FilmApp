@@ -1,10 +1,16 @@
 package com.example.moviematchbackend.controller;
 
 import com.example.moviematchbackend.models.entity.Film;
+import com.example.moviematchbackend.models.entity.Prietenie;
+import com.example.moviematchbackend.models.entity.StatusCerere;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.services.film_service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 //acea clasa care imi face legatura dintre frontend si backend
 @RestController

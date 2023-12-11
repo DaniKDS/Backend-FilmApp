@@ -33,3 +33,50 @@ mai trebuie facuta niste configuratie la rute (url pentru pagina de `/error`)
 
 la prietenie: in db poti sa ai prietenie intre utilizatorii 2, 3 dar nu si intre 3, 2 ceea ce inseamna ca prietenia e doar de o parte...
 e un pic dubios si nu foarte corect; rezolvare: creem automat la acceptarea unei cereri si prietenia inversa si o adaugam in baza de date?
+---
+# Rulare Backend + Frontend
+Necesitati:
+1. Referintele pe frontend trebuie sa fie relative (`/login`, nu `http://localhost:8080/login`)
+2. Trebuie sa stim in avans pe ce pagini nu avem voie sa fim daca nu suntem logati ca sa putem face configurarea
+3. Orice tine de backend si API (fara login si logout), trebuie sa aiba inceapa cu `/api/`
+
+## Nginx
+Nginx e un web server pe care o sa-l folosim pentru a ruta request-urile catre aplicatia corecta (frontend sau backend), in functie de path-ul dat. Adica orice request catre un link care incepe cu `/api/` (sau `/login`, `/logout` si `oauth`) va fi trimis catre backend, iar restul vor fi trimise catre frontend.
+
+Asa arata configuratia:
+```nginx
+events{}
+http{
+server {
+	listen 9090;
+	server_name localhost;
+	
+	#backend
+	location ~* /(api|oauth2|logout|login)/? {
+		proxy_pass http://localhost:8083;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $host:$server_port;
+		proxy_pass_request_headers on;
+	}
+	
+	# frontend
+	location / {
+		proxy_pass http://localhost:5173;
+	}
+	
+	# trebuie sa fii logat sa le accesezi; nu exista inca
+	location /test.html {
+		auth_request /api/test;
+		error_page 500 =302 /oauth2/authorization/google; 
+		proxy_pass http://localhost:5173;
+	}
+}
+}
+```
+
+Cum se ruleaza:
+1. Se porneste backend-ul
+2. Se porneste frontend-ul
+3. Se ruleaza comanda `start nginx` intr-un terminal Powershell in acelasi folder in care se afla nginx.exe (este o arhiva cu toate fisierele)
+4. Daca e nevoie de modificari, se modifica fisierul `conf/nginx.conf`, si se ruleaza `./nginx.exe -s reload`

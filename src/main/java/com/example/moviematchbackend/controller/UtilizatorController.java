@@ -3,7 +3,10 @@ package com.example.moviematchbackend.controller;
 
 import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
+import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +36,12 @@ public class UtilizatorController {
     @GetMapping("/api/utilizatori/username/{username}")
     public Utilizator getUtilizatorByUsername(@PathVariable String username) {
         return this.utilizatorService.getUtilizatorByUsername(username);
+    }
+    @GetMapping("/api/utilizatori/current")
+    public Utilizator getCurrentUser(Authentication authentication){
+       String mail = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+       Utilizator user = utilizatorService.getUtilizatorByEmail(mail);
+       return user;
     }
 
 }
