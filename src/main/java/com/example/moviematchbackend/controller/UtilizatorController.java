@@ -1,7 +1,9 @@
 package com.example.moviematchbackend.controller;
 
 
+import com.example.moviematchbackend.models.dto.UtilizatorDto;
 import com.example.moviematchbackend.models.entity.Utilizator;
+import com.example.moviematchbackend.models.mapper.UtilizatorMapper;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class UtilizatorController {
     private final UtilizatorMapper utilizatorMapper;
 
     @Autowired
-    public UtilizatorController(UtilizatorService utilizatorService) {
+    public UtilizatorController(UtilizatorService utilizatorService, UtilizatorMapper utilizatorMapper) {
         this.utilizatorService = utilizatorService;
         this.utilizatorMapper = utilizatorMapper;
     }
@@ -41,10 +43,10 @@ public class UtilizatorController {
         return utilizatorMapper.utilizatorToUtilizatorDto(utilizator);
     }
     @GetMapping("/api/utilizatori/current")
-    public Utilizator getCurrentUser(Authentication authentication){
+    public UtilizatorDto getCurrentUser(Authentication authentication){
        String mail = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
        Utilizator user = utilizatorService.getUtilizatorByEmail(mail);
-       return user;
+       return utilizatorMapper.utilizatorToUtilizatorDto(user);
     }
 
 }

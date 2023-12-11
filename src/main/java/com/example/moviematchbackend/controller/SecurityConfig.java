@@ -31,7 +31,6 @@ import java.util.Iterator;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 //asta e o clasa de test, poate fi scoasa ulterior
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 class LoginController {
 
@@ -48,7 +47,6 @@ class LoginController {
 
 }
 
-@CrossOrigin(origins = "http://localhost:5173")
 @Configuration
 @EnableWebSecurity
 public class  SecurityConfig {

@@ -37,18 +37,22 @@ public class PerecheController {
         return perecheService.getPerecheById(id);
     }
     //acest endpoint imi returneaza o pereche dupa id in format json
-    @GetMapping("/api/filme_utilizator")
-    public List<Film> getMoviesOf(Authentication authentication){
+    @GetMapping("/api/filme_de_vazut")
+    public List<Film> getMoviesToSee(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
-        List<Pereche> perechi = perecheService.getAllPereche();
-        List<Film> filme = new ArrayList<>();
-        for(Pereche pr: perechi){
-            if(pr.getUtilizator() == user_curent){
-                filme.add(pr.getFilm());
-            }
-        }
-        return filme;
+        return perecheService.getMoviesToSee(user_curent);
     }
-
+    @GetMapping("/api/filme_vazute")
+    public List<Film> getSeenMovies(Authentication authentication){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        return perecheService.getSeenMovies(user_curent);
+    }
+    @GetMapping("/api/filme_comune/{id}")
+    public List<Film> getMoviesWithFriend(Authentication authentication, @PathVariable Long id){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        return perecheService.getMoviesWithFriend(user_curent, utilizatorService.getUtilizatorById(id));
+    }
 }

@@ -2,6 +2,7 @@ package com.example.moviematchbackend.services.pereche_service;
 
 import com.example.moviematchbackend.models.entity.Film;
 import com.example.moviematchbackend.models.entity.Pereche;
+import com.example.moviematchbackend.models.entity.StatusVizionare;
 import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.PerecheRepository;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,35 @@ public class PerecheService implements PerecheServiceInterface{
     public void savePereche(Utilizator utilizator, Film film) {
         Pereche pereche = new Pereche(utilizator, film);
         this.perecheRepository.save(pereche);
+    }
+
+    public List<Film> getMoviesToSee(Utilizator user){
+        List<Pereche> perechi = getAllPereche();
+        List<Film> filme = new ArrayList<>();
+        for(Pereche pr: perechi){
+            if(pr.getUtilizator() == user && pr.getStatusVizionare() == StatusVizionare.IN_ASTEPTARE){
+                filme.add(pr.getFilm());
+            }
+        }
+        return filme;
+    }
+    public List<Film> getSeenMovies(Utilizator user){
+        List<Pereche> perechi = getAllPereche();
+        List<Film> filme = new ArrayList<>();
+        for(Pereche pr: perechi){
+            if(pr.getUtilizator() == user && pr.getStatusVizionare() == StatusVizionare.VAZUT){
+                filme.add(pr.getFilm());
+            }
+        }
+        return filme;
+    }
+    public List<Film> getMoviesWithFriend(Utilizator utilizator, Utilizator friend){
+        List<Pereche> perechi = getAllPereche();
+        List<Film> my_movies = getMoviesToSee(utilizator);
+        List<Film> filme = new ArrayList<>();
+        List<Film> his_movies = getMoviesToSee(friend);
+        his_movies.retainAll(my_movies);
+        return his_movies;
     }
 
 
