@@ -2,9 +2,14 @@ package com.example.moviematchbackend.controller;
 
 import com.example.moviematchbackend.models.dto.FilmDto;
 import com.example.moviematchbackend.models.entity.Film;
+import com.example.moviematchbackend.models.entity.Prietenie;
+import com.example.moviematchbackend.models.entity.StatusCerere;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.models.mapper.FilmMapper;
 import com.example.moviematchbackend.services.film_service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,7 +31,6 @@ public class FilmController {
         this.filmService = filmService;
         this.filmMapper = filmMapper;
     }
-
     //acest constructor este folosit pentru a crea un obiect de tip FilmController
 
     @GetMapping("/api/filme")
@@ -34,14 +38,13 @@ public class FilmController {
         List<Film> filme = this.filmService.getAllFilme();
         return filmMapper.filmeToFilmDtoList(filme);
     }
+    //acest endpoint imi returneaza toate filmele din baza de date in format json
 
     @GetMapping("/api/filme/id/{id}")
     public FilmDto getFilmById(@PathVariable Long id) {
         Film film = filmService.getFilmByIdFilm(id);
         return filmMapper.filmToFilmDto(film);
     }
-
-
     //acest endpoint imi returneaza un film dupa id in format json
     @GetMapping("/api/filme/titlu/{titlu}")
     public FilmDto getFilmByTitlu(@PathVariable String titlu) {
@@ -71,12 +74,10 @@ public class FilmController {
     }
 
     //acest endpoint imi adauga un film in baza de date
-
     @DeleteMapping("/api1/filme/{id}")
     public void deleteFilm(@PathVariable Long id) {
         this.filmService.deleteFilm(this.filmService.getFilmByIdFilm(id));
     }
-
     //acest endpoint imi sterge un film din baza de date
     @PostMapping("/api/listafilme")
     public void addMovieToYourOwnList(@RequestBody Film film) {

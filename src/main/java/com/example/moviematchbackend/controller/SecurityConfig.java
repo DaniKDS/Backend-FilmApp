@@ -31,28 +31,22 @@ import java.util.Iterator;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 //asta e o clasa de test, poate fi scoasa ulterior
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 class LoginController {
 
-    @GetMapping("/")
-    public String home() {
-        return "esti acasa bine ai venit";
-    }
-
-    @GetMapping("/test")
+    // mock function, folosita pentru autentificare
+    @GetMapping("/api/test")
     public String getUser(Authentication userDetails) {
-        return "User Details: " + ((DefaultOidcUser) userDetails.getPrincipal()).getEmail();
+        return "";
     }
 
-    @GetMapping("/print_session")
+    @GetMapping("/api/print_session")
     public String print_session(@RequestHeader("Cookie") String session) {
-        return session.toString();
+        return session;
     }
 
 }
 
-@CrossOrigin(origins = "http://localhost:5173")
 @Configuration
 @EnableWebSecurity
 public class  SecurityConfig {
@@ -82,9 +76,7 @@ public class  SecurityConfig {
                             util.setUsernameUtilizator((user.getGivenName() + "_" + user.getFamilyName()).toLowerCase().replace('-', '_').replace(' ', '_'));
                             utilizatorService.saveUtilizator(util);
                         }
-
                         response.sendRedirect("/");
-
                     });
                 }
                 )
@@ -103,4 +95,3 @@ public class  SecurityConfig {
     }
 
 }
-
