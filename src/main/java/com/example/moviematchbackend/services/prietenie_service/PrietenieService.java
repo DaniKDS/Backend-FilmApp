@@ -1,12 +1,18 @@
 package com.example.moviematchbackend.services.prietenie_service;
 
 import com.example.moviematchbackend.models.entity.Prietenie;
+import com.example.moviematchbackend.models.entity.StatusCerere;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.PrietenieRepository;
+import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 //acea clasa care imi face legatura dintre frontend si backend
 
 @Service
@@ -44,6 +50,34 @@ public class PrietenieService implements PrietenieServiceInterface {
     public void deletePrietenie(Prietenie prietenie) {
         this.prietenieRepository.delete(prietenie);
     }
-
+    public List<Utilizator> getSentRequests(Utilizator user_curent){
+        List<Prietenie> prietenii = getAllPrietenii();
+        List<Utilizator> prieteniOf = new ArrayList<>();
+        for(Prietenie pr: prietenii){
+            if(pr.getUtilizator1() == user_curent && pr.getStatusCerere() == StatusCerere.IN_ASTEPTARE){
+                prieteniOf.add(pr.getUtilizator2());
+            }
+        }
+        return prieteniOf;
+    }
+    public Prietenie getPrietenieByUsers(Long idUtil1, Long idUtil2){
+        List<Prietenie> prietenii = getAllPrietenii();
+        for(Prietenie prietenie:prietenii){
+            if(Objects.equals(prietenie.getUtilizator2().getIdUtilizator(), idUtil1) && Objects.equals(prietenie.getUtilizator1().getIdUtilizator(), idUtil2)){
+                return prietenie;
+            }
+        }
+        return null;
+    }
+    public List<Utilizator> getFriendsOf(Utilizator utilizator){
+        List<Prietenie> prietenii = getAllPrietenii();
+        List<Utilizator> prieteniOf = new ArrayList<>();
+        for(Prietenie pr: prietenii){
+            if(pr.getUtilizator1() == utilizator && pr.getStatusCerere() == StatusCerere.ACCEPTATA){
+                prieteniOf.add(pr.getUtilizator2());
+            }
+        }
+        return prieteniOf;
+    }
 
 }
