@@ -73,7 +73,7 @@ public class FilmController {
     }
 
     //acest endpoint imi adauga un film in baza de date
-    @DeleteMapping("/api1/filme/{id}")
+    @DeleteMapping("/api/filme/{id}")
     public void deleteFilm(@PathVariable Long id) {
         this.filmService.deleteFilm(this.filmService.getFilmByIdFilm(id));
     }
@@ -83,7 +83,7 @@ public class FilmController {
         this.filmService.addMovieToYourOwnList(film);
     }
 
-    @DeleteMapping("/api1/filmelista/{id}")
+    @DeleteMapping("/api/filmelista/{id}")
     public void deleteFilmFromFavouriteList(@PathVariable Long id) {
         this.filmService.deleteFilmFromFavouriteList(id);
     }
