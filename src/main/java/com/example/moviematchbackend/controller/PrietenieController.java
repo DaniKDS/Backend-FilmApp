@@ -118,11 +118,19 @@ public class PrietenieController {
     public List<Utilizator> getFriendsOf(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+
+        return prietenieService.getFriendsOf(user_curent);
+    }
+
+    @GetMapping("/api/afisare_cereri")
+    public List<Utilizator> getReceivedRequests(Authentication authentication){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         List<Prietenie> prietenii = prietenieService.getAllPrietenii();
         List<Utilizator> prieteniOf = new ArrayList<>();
         for(Prietenie pr: prietenii){
-            if(pr.getUtilizator1() == user_curent && pr.getStatusCerere() == StatusCerere.ACCEPTATA){
-                prieteniOf.add(pr.getUtilizator2());
+            if(pr.getUtilizator2() == user_curent && pr.getStatusCerere() == StatusCerere.IN_ASTEPTARE){
+                prieteniOf.add(pr.getUtilizator1());
             }
         }
         return prieteniOf;
@@ -131,10 +139,13 @@ public class PrietenieController {
     @GetMapping("/api/afisare_inamici")
     public List<Utilizator> getEnemiesOf(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         List<Utilizator> users = utilizatorService.getAllUtilizatori();
         List<Utilizator> prieteniOf = getFriendsOf(authentication);
         users.removeAll(prieteniOf);
-        users.remove(utilizatorService.getUtilizatorByEmail(user_email));
+        users.remove(user_curent);
+        users.removeAll(getReceivedRequests(authentication));
+        users.removeAll(prietenieService.getSentRequests(user_curent));
         return users;
     }
 
@@ -151,7 +162,7 @@ public class PrietenieController {
             //verificam daca utilizatorul care sterge prietenul este cel logat
             if(prietenie1.getUtilizator1() == user_curent) {
                 //cand stergem un prieten, stergem si relatia in sens invers
-                Prietenie pr = getPrietenieByUsers(prietenie1.getUtilizator2().getIdUtilizator(), user_curent.getIdUtilizator());
+                Prietenie pr = prietenieService.getPrietenieByUsers(prietenie1.getUtilizator2().getIdUtilizator(), user_curent.getIdUtilizator());
                 prietenieService.deletePrietenie(prietenie1);
                 prietenieService.deletePrietenie(pr);
                 return new ResponseEntity<>(HttpStatus.valueOf(200));
@@ -166,6 +177,7 @@ public class PrietenieController {
     public ResponseEntity<String> rejectFriendRequest(Authentication authentication, @RequestBody Long id_prietenie){
         Response response = new Response();
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         Prietenie prietenie1 = prietenieService.getPrietenieById(id_prietenie);
         //verificam daca exista prietenia a carui status dorim sa-l schimbam; daca nu exista -> eroare
@@ -187,13 +199,10 @@ public class PrietenieController {
     }
 
 
-    Prietenie getPrietenieByUsers(Long idUtil1, Long idUtil2){
-        List<Prietenie> prietenii = prietenieService.getAllPrietenii();
-        for(Prietenie prietenie:prietenii){
-            if(Objects.equals(prietenie.getUtilizator2().getIdUtilizator(), idUtil1) && Objects.equals(prietenie.getUtilizator1().getIdUtilizator(), idUtil2)){
-                return prietenie;
-            }
-        }
-        return null;
+
+    public List<Utilizator> getSentRequests(Authentication authentication){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        return prietenieService.getSentRequests(user_curent);
     }
 }
