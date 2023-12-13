@@ -63,8 +63,7 @@ public class PrietenieService implements PrietenieServiceInterface {
     public Prietenie getPrietenieByUsers(Long idUtil1, Long idUtil2){
         List<Prietenie> prietenii = getAllPrietenii();
         for(Prietenie prietenie:prietenii){
-            if( prietenie.getUtilizator1().getIdUtilizator() == idUtil1 && prietenie.getUtilizator2().getIdUtilizator() == idUtil2
-            && prietenie.getStatusCerere() == StatusCerere.ACCEPTATA){
+            if( prietenie.getUtilizator1().getIdUtilizator() == idUtil1 && prietenie.getUtilizator2().getIdUtilizator() == idUtil2){
                 return prietenie;
             }
         }
