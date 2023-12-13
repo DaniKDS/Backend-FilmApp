@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//acea clasa care imi face legatura dintre frontend si backend
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class PrietenieController {
 
@@ -115,6 +113,7 @@ public class PrietenieController {
             }
         }
     }
+
     @GetMapping("/api/afisare_prieteni")
     public List<Utilizator> getFriendsOf(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
@@ -127,6 +126,16 @@ public class PrietenieController {
             }
         }
         return prieteniOf;
+    }
+
+    @GetMapping("/api/afisare_inamici")
+    public List<Utilizator> getEnemiesOf(Authentication authentication){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        List<Utilizator> users = utilizatorService.getAllUtilizatori();
+        List<Utilizator> prieteniOf = getFriendsOf(authentication);
+        users.removeAll(prieteniOf);
+        users.remove(utilizatorService.getUtilizatorByEmail(user_email));
+        return users;
     }
 
 
@@ -176,6 +185,7 @@ public class PrietenieController {
             }
         }
     }
+
 
     Prietenie getPrietenieByUsers(Long idUtil1, Long idUtil2){
         List<Prietenie> prietenii = prietenieService.getAllPrietenii();
