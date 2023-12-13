@@ -88,12 +88,12 @@ public class PrietenieController {
             return new ResponseEntity<>("Exista deja o cerere de prietenie in curs.", HttpStatus.valueOf(400));
         }
     }
-    @PostMapping("/api/cerere_prietenie/accept")
-    public ResponseEntity<String> acceptFriendRequest(Authentication authentication, @RequestBody Long id_prietenie){
+    @PostMapping("/api/cerere_prietenie/accept/{id}")
+    public ResponseEntity<String> acceptFriendRequest(Authentication authentication, @PathVariable Long id){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         Prietenie prietenie = new Prietenie();
-        Prietenie prietenie1 = prietenieService.getPrietenieById(id_prietenie);
+        Prietenie prietenie1 = prietenieService.getPrietenieById(id);
         //verificam daca exista prietenia a carui status dorim sa-l schimbam; daca nu exista -> eroare
         if(prietenie1 == null){
             return new ResponseEntity<>("Cererea de prietenie nu exista", HttpStatus.valueOf(404));
@@ -150,11 +150,12 @@ public class PrietenieController {
     }
 
 
-    @PostMapping("/api/stergere_prieten")
-    public ResponseEntity<String> deleteFriend(Authentication authentication, @RequestBody Long id_prietenie){
+    @PostMapping("/api/stergere_prieten/{id}")
+    public ResponseEntity<String> deleteFriend(Authentication authentication, @PathVariable Long id){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
-        Prietenie prietenie1 = prietenieService.getPrietenieById(id_prietenie);
+        Prietenie prietenie1 = prietenieService.getPrietenieByUsers(user_curent.getIdUtilizator(), id);
+
         //verificam daca exista prietenia pe care dorim sa o stergem
         if(prietenie1 == null){
             return new ResponseEntity<>("Cererea de prietenie nu exista",HttpStatus.valueOf(404));
@@ -162,9 +163,9 @@ public class PrietenieController {
             //verificam daca utilizatorul care sterge prietenul este cel logat
             if(prietenie1.getUtilizator1() == user_curent) {
                 //cand stergem un prieten, stergem si relatia in sens invers
-                Prietenie pr = prietenieService.getPrietenieByUsers(prietenie1.getUtilizator2().getIdUtilizator(), user_curent.getIdUtilizator());
+                Prietenie prietenie2 = prietenieService.getPrietenieByUsers(id, user_curent.getIdUtilizator());
                 prietenieService.deletePrietenie(prietenie1);
-                prietenieService.deletePrietenie(pr);
+                prietenieService.deletePrietenie(prietenie2);
                 return new ResponseEntity<>(HttpStatus.valueOf(200));
 
             }else{
@@ -173,13 +174,20 @@ public class PrietenieController {
             }
         }
     }
-    @PostMapping("/api/cerere_prietenie/reject")
-    public ResponseEntity<String> rejectFriendRequest(Authentication authentication, @RequestBody Long id_prietenie){
+
+    @GetMapping("/api/afisare_pr_by_utilizatori/{id}")
+    public Prietenie getPrietenieByUsers(Authentication authentication,@PathVariable Long id){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        return prietenieService.getPrietenieByUsers(user_curent.getIdUtilizator(), id);
+    }
+    @PostMapping("/api/cerere_prietenie/reject/{id}")
+    public ResponseEntity<String> rejectFriendRequest(Authentication authentication, @PathVariable Long id){
         Response response = new Response();
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
 
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
-        Prietenie prietenie1 = prietenieService.getPrietenieById(id_prietenie);
+        Prietenie prietenie1 = prietenieService.getPrietenieById(id);
         //verificam daca exista prietenia a carui status dorim sa-l schimbam; daca nu exista -> eroare
         if(prietenie1 == null){
             return new ResponseEntity<>("Cererea de prietenie nu exista",HttpStatus.valueOf(404));
