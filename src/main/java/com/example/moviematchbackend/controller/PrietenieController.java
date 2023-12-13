@@ -93,7 +93,7 @@ public class PrietenieController {
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         Prietenie prietenie = new Prietenie();
-        Prietenie prietenie1 = prietenieService.getPrietenieById(id);
+        Prietenie prietenie1 = prietenieService.getPrietenieByUsers(id, user_curent.getIdUtilizator());
         //verificam daca exista prietenia a carui status dorim sa-l schimbam; daca nu exista -> eroare
         if(prietenie1 == null){
             return new ResponseEntity<>("Cererea de prietenie nu exista", HttpStatus.valueOf(404));
@@ -187,7 +187,7 @@ public class PrietenieController {
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
 
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
-        Prietenie prietenie1 = prietenieService.getPrietenieById(id);
+        Prietenie prietenie1 = prietenieService.getPrietenieByUsers(id, user_curent.getIdUtilizator());
         //verificam daca exista prietenia a carui status dorim sa-l schimbam; daca nu exista -> eroare
         if(prietenie1 == null){
             return new ResponseEntity<>("Cererea de prietenie nu exista",HttpStatus.valueOf(404));
