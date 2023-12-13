@@ -12,7 +12,6 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class UtilizatorController {
 
@@ -44,6 +43,9 @@ public class UtilizatorController {
     }
     @GetMapping("/api/utilizatori/current")
     public UtilizatorDto getCurrentUser(Authentication authentication){
+       if (authentication == null){
+           return new UtilizatorDto();
+       }
        String mail = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
        Utilizator user = utilizatorService.getUtilizatorByEmail(mail);
        return utilizatorMapper.utilizatorToUtilizatorDto(user);

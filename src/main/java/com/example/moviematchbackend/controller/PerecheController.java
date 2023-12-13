@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-//acea clasa care imi face legatura dintre frontend si backend
-@CrossOrigin(origins = "http://localhost:5173")
+//acea clasa care imi face legatura dintre fron
 @RestController
 public class PerecheController {
     @Autowired

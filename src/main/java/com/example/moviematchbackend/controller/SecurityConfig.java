@@ -59,8 +59,7 @@ public class  SecurityConfig {
         return http
             .authorizeHttpRequests(auth -> {
                 // astea sunt vizibile si fara sa fii logged in
-                auth.requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll();
-                auth.requestMatchers("/favicon.ico").permitAll();
+                auth.requestMatchers("/", "/error", "/oauth2/**", "/login/**", "/api/utilizatori/current").permitAll();
                 //toate celelalte nu sunt
                 auth.anyRequest().authenticated();
             })
