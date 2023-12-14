@@ -12,8 +12,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.metal.MetalIconFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 //acea clasa care imi face legatura dintre frontend si backend
 
@@ -38,7 +43,9 @@ public class FilmController {
         return filmMapper.filmeToFilmDtoList(filme);
     }
     //acest endpoint imi returneaza toate filmele din baza de date in format json
-
+    public List<Film> getFilme1() {
+        return this.filmService.getAllFilme();
+    }
     @GetMapping("/api/filme/id/{id}")
     public FilmDto getFilmById(@PathVariable Long id) {
         Film film = filmService.getFilmByIdFilm(id);
@@ -93,4 +100,24 @@ public class FilmController {
         return this.filmService.getFilmsFromMyFavouriteList();
     }
 
+    @GetMapping("/api/filter_movie/{searchText}")
+    public List<FilmDto> handleFilter(@PathVariable String searchText) {
+        List<FilmDto> filme = getFilme();
+        List<FilmDto> filme1 = getFilme();
+        Set<String> lowerCaseTitles = filme1.stream()
+                .map(film -> film.getTitlu().toLowerCase())
+                .collect(Collectors.toSet());
+
+        // Filter filme based on lowercase titles present in filme1
+        Predicate<FilmDto> p1 = film -> lowerCaseTitles.contains(film.getTitlu().toLowerCase()) && film.getTitlu().toLowerCase().contains(searchText.toLowerCase());
+        filme = filme.stream()
+                .filter(p1)
+                .collect(Collectors.toList());
+
+        return filme;
+    }
+    @GetMapping("/api/filter_movie/")
+    public List<FilmDto> emptyfilter(){
+        return getFilme();
+    }
 }

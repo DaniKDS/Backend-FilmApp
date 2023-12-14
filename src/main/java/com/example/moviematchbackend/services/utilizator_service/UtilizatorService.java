@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 //acea clasa care imi face legatura dintre frontend si backend
 @Service
@@ -50,6 +52,8 @@ public class UtilizatorService implements UtilizatorServiceInterface{
     }
 
     //acesta metoda imi adauga un utilizator in baza de date
+
+
 
     @Override
     public void deleteUtilizator(Utilizator utilizator) {
