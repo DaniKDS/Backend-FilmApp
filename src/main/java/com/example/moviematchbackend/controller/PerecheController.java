@@ -2,6 +2,7 @@ package com.example.moviematchbackend.controller;
 
 
 import com.example.moviematchbackend.models.entity.*;
+import com.example.moviematchbackend.services.film_service.FilmService;
 import com.example.moviematchbackend.services.pereche_service.PerecheService;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 //acea clasa care imi face legatura dintre fron
 @RestController
 public class PerecheController {
@@ -18,6 +21,9 @@ public class PerecheController {
     private PerecheService perecheService;
     @Autowired
     private UtilizatorService utilizatorService;
+    @Autowired
+    private FilmService filmService;
+
     @Autowired
     public PerecheController(PerecheService perecheService, UtilizatorService utilizatorService) {
         this.perecheService = perecheService;
@@ -54,4 +60,29 @@ public class PerecheController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return perecheService.getMoviesWithFriend(user_curent, utilizatorService.getUtilizatorById(id));
     }
+
+    @GetMapping("/api/filme_nefavorite_gen/{gen}")
+    public List<Film> getMoviesByGenreNotInFavouriteList(Authentication authentication, @PathVariable String gen){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        Map<String,List<Film>> movies = filmService.groupMoviesByGenre();
+        List<Film> moviesToSee = perecheService.getMoviesToSee(user_curent);
+        List<Film> seenMovies = perecheService.getSeenMovies(user_curent);
+        movies.keySet().retainAll(moviesToSee);
+        movies.keySet().retainAll(seenMovies);
+        return movies.get(gen);
+    }
+
+    @GetMapping("/api/filme_nefavorite_tara/{locatie}")
+    public List<Film> getMoviesByCountryNotInFavouriteList(Authentication authentication, @PathVariable String locatie){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        Map<String,List<Film>> movies = filmService.groupMoviesByCountry();
+        List<Film> moviesToSee = perecheService.getMoviesToSee(user_curent);
+        List<Film> seenMovies = perecheService.getSeenMovies(user_curent);
+        movies.keySet().retainAll(moviesToSee);
+        movies.keySet().retainAll(seenMovies);
+        return movies.get(locatie);
+    }
+
 }

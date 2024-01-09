@@ -75,6 +75,4 @@ public class PerecheService implements PerecheServiceInterface{
         his_movies.retainAll(my_movies);
         return his_movies;
     }
-
-
 }
