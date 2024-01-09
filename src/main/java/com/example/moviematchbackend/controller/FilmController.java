@@ -7,16 +7,17 @@ import com.example.moviematchbackend.models.entity.StatusCerere;
 import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.models.mapper.FilmMapper;
 import com.example.moviematchbackend.services.film_service.FilmService;
+import com.example.moviematchbackend.services.pereche_service.PerecheService;
+import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.plaf.metal.MetalIconFactory;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -26,14 +27,20 @@ import java.util.stream.Collectors;
 @RestController
 public class FilmController {
 
-
+    @Autowired
+    private UtilizatorService utilizatorService;
+    @Autowired
+    private PerecheService perecheService;
     private final FilmService filmService;
     private final FilmMapper filmMapper;
 
     @Autowired
-    public FilmController(FilmService filmService, FilmMapper filmMapper) {
+    public FilmController(FilmService filmService, FilmMapper filmMapper, PerecheService perecheService,
+                          UtilizatorService utilizatorService) {
         this.filmService = filmService;
         this.filmMapper = filmMapper;
+        this.perecheService = perecheService;
+        this.utilizatorService = utilizatorService;
     }
     //acest constructor este folosit pentru a crea un obiect de tip FilmController
 
@@ -116,6 +123,31 @@ public class FilmController {
 
         return filme;
     }
+    @GetMapping("/api/random_movies")
+    List<Film> getRandomMovies(Authentication authentication){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        List<Film> filme = filmService.getAllFilme();
+        List<Film> yourMovies = perecheService.getMoviesToSee(user_curent);
+        List<Film> result = new ArrayList<>();
+        filme.removeAll(yourMovies);
+        LocalDate localDate = LocalDate.now();
+        Random rnd = new Random(Timestamp.valueOf(localDate.atStartOfDay()).getTime());
+        int i = 0,y;
+        List<Integer> randoms = new ArrayList<>();
+        while(i<10){
+            y = rnd.nextInt(filme.size());
+            if(!randoms.contains(y)){
+                randoms.add(y);
+                i++;
+            }
+        }
+        for(Integer k: randoms){
+            result.add(filme.get(k));
+        }
+        return result;
+    }
+
     @GetMapping("/api/filter_movie/")
     public List<FilmDto> emptyfilter(){
         return getFilme();

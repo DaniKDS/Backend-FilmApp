@@ -13,8 +13,6 @@ public interface FilmServiceInterface {
     Film saveFilm(Film film);
     //Aceasta functie salveaza un film in baza de date
 
-
-
     void deleteFilm(Film film);
     //Aceasta functie sterge un film din baza de date
 
@@ -29,5 +27,6 @@ public interface FilmServiceInterface {
     List<Film> getFilmsFromMyFavouriteList();
 
     void deleteFilmFromFavouriteList(Long id);
+
 
 }

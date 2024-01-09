@@ -5,6 +5,7 @@ package com.example.moviematchbackend.controller;
 import com.example.moviematchbackend.models.dto.UtilizatorDto;
 import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.models.mapper.UtilizatorMapper;
+import com.example.moviematchbackend.services.prietenie_service.PrietenieService;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,14 @@ public class UtilizatorController {
     private final UtilizatorMapper utilizatorMapper;
 
     @Autowired
-    public UtilizatorController(UtilizatorService utilizatorService, UtilizatorMapper utilizatorMapper) {
+    PrietenieService prietenieService;
+
+    @Autowired
+    public UtilizatorController(UtilizatorService utilizatorService, UtilizatorMapper utilizatorMapper,
+                                PrietenieService prietenieService) {
         this.utilizatorService = utilizatorService;
         this.utilizatorMapper = utilizatorMapper;
+        this.prietenieService = prietenieService;
     }
     //acest endpoint imi returneaza toti utilizatorii din baza de date in format json
     @GetMapping("/api/utilizatori")
@@ -56,9 +62,11 @@ public class UtilizatorController {
        return utilizatorMapper.utilizatorToUtilizatorDto(user);
     }
     @GetMapping("/api/filter_user/{searchText}")
-    public List<UtilizatorDto> handleFilter(@PathVariable String searchText) {
-        List<UtilizatorDto> user = getUtilizatori();
-        List<UtilizatorDto> user1 = getUtilizatori();
+    public List<UtilizatorDto> handleFilter(Authentication authentication, @PathVariable String searchText) {
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        List<Utilizator> user = prietenieService.getEnemiesOf(user_curent);
+        List<Utilizator> user1 = prietenieService.getEnemiesOf(user_curent);
 
         // Collect lowercased concatenated names into a set
         Set<String> lowerCaseNames = user1.stream()
@@ -66,18 +74,18 @@ public class UtilizatorController {
                 .collect(Collectors.toSet());
 
         // Filter users based on lowercase concatenated names present in lowerCaseNames set
-        Predicate<UtilizatorDto> nameMatchesSearchText = utilizator -> {
+        Predicate<Utilizator> nameMatchesSearchText = utilizator -> {
             String fullNameLower = utilizator.getNumeUtilizator().toLowerCase() + utilizator.getPrenumeUtilizator().toLowerCase();
             String searchTextLower = searchText.toLowerCase();
             return fullNameLower.contains(searchTextLower);
         };
 
         // Apply the filter and collect the matching users
-        List<UtilizatorDto> filteredUsers = user.stream()
+        List<Utilizator> filteredUsers = user.stream()
                 .filter(nameMatchesSearchText)
                 .collect(Collectors.toList());
 
-        return filteredUsers;
+        return utilizatorMapper.utilizatoriToUtilizatorDtoList(filteredUsers);
     }
     @GetMapping("/api/filter_user/")
     public List<UtilizatorDto> emptyfilter(){

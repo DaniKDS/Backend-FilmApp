@@ -41,7 +41,8 @@ Necesitati:
 3. Orice tine de backend si API (fara login si logout), trebuie sa aiba inceapa cu `/api/`
 
 ## Nginx
-Nginx e un web server pe care o sa-l folosim pentru a ruta request-urile catre aplicatia corecta (frontend sau backend), in functie de path-ul dat. Adica orice request catre un link care incepe cu `/api/` (sau `/login`, `/logout` si `oauth`) va fi trimis catre backend, iar restul vor fi trimise catre frontend.
+Nginx e un web server pe care o sa-l folosim pentru a ruta request-urile catre aplicatia corecta (frontend sau backend), in functie de path-ul dat. 
+Adica orice request catre un link care incepe cu `/api/` (sau `/login`, `/logout` si `oauth`) va fi trimis catre backend, iar restul vor fi trimise catre frontend.
 
 Asa arata configuratia:
 ```nginx
