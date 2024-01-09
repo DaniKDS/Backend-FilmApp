@@ -1,7 +1,9 @@
 package com.example.moviematchbackend.services.film_service;
 
 import com.example.moviematchbackend.models.entity.Film;
+import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.FilmRepository;
+import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,4 +88,8 @@ public class FilmService implements FilmServiceInterface {
     public List<Film> getFilmeByLocatieFilmare(String locatieFilmare) {
         return this.filmRepository.getFilmeByLocatieFilmare(locatieFilmare);
     }
+
+
+
+
 }
