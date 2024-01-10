@@ -67,7 +67,8 @@ public class FilmService implements FilmServiceInterface {
     }
 
     @Override
-    public void addMovieToYourOwnList(Film film) {
+    public void addMovieToYourOwnList(Long id_film) {
+        Film film = this.getFilmByIdFilm(id_film);
         this.myFavouriteListOfFilms.add(film);
     }
 
