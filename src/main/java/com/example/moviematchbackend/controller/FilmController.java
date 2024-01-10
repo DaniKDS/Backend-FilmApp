@@ -152,4 +152,14 @@ public class FilmController {
     public List<FilmDto> emptyfilter(){
         return getFilme();
     }
+
+    @GetMapping("/api/genre_number")
+    public Integer getNumberOfGenre() {
+        return filmService.groupMoviesByGenre().size();
+    }
+
+    @GetMapping("/api/number_filme/gen/{gen}")
+    public Integer getNumberOfMoviesForGenre(@PathVariable String gen) {
+        return filmService.groupMoviesByGenre().get(gen).size();
+    }
 }

@@ -1,15 +1,20 @@
 package com.example.moviematchbackend.services.film_service;
 
+import com.example.moviematchbackend.models.dto.FilmDto;
 import com.example.moviematchbackend.models.entity.Film;
 import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.FilmRepository;
 import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 //acea clasa care imi face legatura dintre frontend si backend
@@ -89,7 +94,14 @@ public class FilmService implements FilmServiceInterface {
         return this.filmRepository.getFilmeByLocatieFilmare(locatieFilmare);
     }
 
+    public Map<String,List<Film>> groupMoviesByGenre(){
+        return this.getAllFilme().stream().collect(Collectors.groupingBy(Film::getGen));
+    }
 
+    public Integer getNumberOfMoviesByGenre(String genre){return getFilmeByGen(genre).size();}
 
+    public Map<String,List<Film>> groupMoviesByCountry(){
+        return this.getAllFilme().stream().collect(Collectors.groupingBy(Film::getLocatieFilmare));
+    }
 
 }
