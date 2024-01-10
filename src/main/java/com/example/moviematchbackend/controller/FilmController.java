@@ -35,12 +35,9 @@ public class FilmController {
     private final FilmMapper filmMapper;
 
     @Autowired
-    public FilmController(FilmService filmService, FilmMapper filmMapper, PerecheService perecheService,
-                          UtilizatorService utilizatorService) {
+    public FilmController(FilmService filmService, FilmMapper filmMapper) {
         this.filmService = filmService;
         this.filmMapper = filmMapper;
-        this.perecheService = perecheService;
-        this.utilizatorService = utilizatorService;
     }
     //acest constructor este folosit pentru a crea un obiect de tip FilmController
 
@@ -92,9 +89,9 @@ public class FilmController {
         this.filmService.deleteFilm(this.filmService.getFilmByIdFilm(id));
     }
     //acest endpoint imi sterge un film din baza de date
-    @PostMapping("/api/listafilme")
-    public void addMovieToYourOwnList(@RequestBody Film film) {
-        this.filmService.addMovieToYourOwnList(film);
+    @PostMapping("/api/listafilmefavorite/{id_film}")
+    public void addMovieToYourOwnList(@RequestBody Long id_film) {
+        this.filmService.addMovieToYourOwnList(id_film);
     }
 
     @DeleteMapping("/api/filmelista/{id}")
@@ -162,4 +159,6 @@ public class FilmController {
     public Integer getNumberOfMoviesForGenre(@PathVariable String gen) {
         return filmService.groupMoviesByGenre().get(gen).size();
     }
+
+
 }
