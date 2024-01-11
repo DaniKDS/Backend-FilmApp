@@ -35,12 +35,9 @@ public class FilmController {
     private final FilmMapper filmMapper;
 
     @Autowired
-    public FilmController(FilmService filmService, FilmMapper filmMapper, PerecheService perecheService,
-                          UtilizatorService utilizatorService) {
+    public FilmController(FilmService filmService, FilmMapper filmMapper) {
         this.filmService = filmService;
         this.filmMapper = filmMapper;
-        this.perecheService = perecheService;
-        this.utilizatorService = utilizatorService;
     }
     //acest constructor este folosit pentru a crea un obiect de tip FilmController
 
@@ -141,13 +138,5 @@ public class FilmController {
 
     @GetMapping("/api/filme/categorii/")
     public List<String> getCategories(){ return filmService.getCategories();}
-//    @GetMapping("/api/genre_number")
-//    public Integer getNumberOfGenre() {
-//        return filmService.fil().size();
-//    }
 
-//    @GetMapping("/api/number_filme/gen/{gen}")
-//    public Integer getNumberOfMoviesForGenre(@PathVariable String gen) {
-//        return filmService.groupMoviesByGenre().get(gen).size();
-//    }
 }
