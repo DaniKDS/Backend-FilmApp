@@ -89,20 +89,6 @@ public class FilmController {
         this.filmService.deleteFilm(this.filmService.getFilmByIdFilm(id));
     }
     //acest endpoint imi sterge un film din baza de date
-    @PostMapping("/api/listafilmefavorite/{id_film}")
-    public void addMovieToYourOwnList(@RequestBody Long id_film) {
-        this.filmService.addMovieToYourOwnList(id_film);
-    }
-
-    @DeleteMapping("/api/filmelista/{id}")
-    public void deleteFilmFromFavouriteList(@PathVariable Long id) {
-        this.filmService.deleteFilmFromFavouriteList(id);
-    }
-
-    @GetMapping("/api/filmelista")
-    public List<Film> getFilmsFromFavouriteList() {
-        return this.filmService.getFilmsFromMyFavouriteList();
-    }
 
     @GetMapping("/api/filter_movie/{searchText}")
     public List<FilmDto> handleFilter(@PathVariable String searchText) {
@@ -150,15 +136,7 @@ public class FilmController {
         return getFilme();
     }
 
-    @GetMapping("/api/genre_number")
-    public Integer getNumberOfGenre() {
-        return filmService.groupMoviesByGenre().size();
-    }
-
-    @GetMapping("/api/number_filme/gen/{gen}")
-    public Integer getNumberOfMoviesForGenre(@PathVariable String gen) {
-        return filmService.groupMoviesByGenre().get(gen).size();
-    }
-
+    @GetMapping("/api/filme/categorii/")
+    public List<String> getCategories(){ return filmService.getCategories();}
 
 }

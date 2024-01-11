@@ -42,13 +42,13 @@ public class PerecheController {
         return perecheService.getPerecheById(id);
     }
     //acest endpoint imi returneaza o pereche dupa id in format json
-    @GetMapping("/api/filme_de_vazut")
+    @GetMapping("/api/filme_de_vazut/")
     public List<Film> getMoviesToSee(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return perecheService.getMoviesToSee(user_curent);
     }
-    @GetMapping("/api/filme_vazute")
+    @GetMapping("/api/filme_vazute/")
     public List<Film> getSeenMovies(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
@@ -68,9 +68,43 @@ public class PerecheController {
         List<Film> movies = filmService.getFilmeByGen(gen);
         List<Film> moviesToSee = perecheService.getMoviesToSee(user_curent);
         List<Film> seenMovies = perecheService.getSeenMovies(user_curent);
-        movies.retainAll(moviesToSee);
-        movies.retainAll(seenMovies);
+        movies.removeAll(moviesToSee);
+        movies.removeAll(seenMovies);
         return movies;
+    }
+
+    @PostMapping("/api/film/sterge_pereche/{id}")
+    public void deletePair(Authentication authentication, @PathVariable Long id){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        Film film = filmService.getFilmByIdFilm(id);
+        Pereche pereche = perecheService.getPerecheByUserAndMovie(user_curent, film);
+        perecheService.deletePereche(pereche);
+    }
+    @GetMapping("/api/film/pereche/{id}")
+    public Pereche getPair(Authentication authentication, @PathVariable Long id){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        Film film = filmService.getFilmByIdFilm(id);
+        return perecheService.getPerecheByUserAndMovie(user_curent,film);
+        //perecheService.deletePereche(perecheService.getPerecheByUserAndMovie(user_curent, film));
+    }
+
+    @PostMapping("/api/film/marcheaza_film_vazut/{id}")
+    public void marcheazaFilmVazut(Authentication authentication, @PathVariable Long id){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        Film film = filmService.getFilmByIdFilm(id);
+        perecheService.deletePereche(perecheService.getPerecheByUserAndMovie(user_curent, film));
+        perecheService.savePereche(user_curent,film, StatusVizionare.VAZUT);
+    }
+
+    @PostMapping("/api/film/adauga_film_in_lista/{id}")
+    public void adauga_film_in_lista(Authentication authentication, @PathVariable Long id){
+        String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
+        Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
+        Film film = filmService.getFilmByIdFilm(id);
+        perecheService.savePereche(user_curent, film, StatusVizionare.IN_ASTEPTARE);
     }
 
     @GetMapping("/api/filme_nefavorite_tara/{locatie}")
@@ -80,8 +114,8 @@ public class PerecheController {
         List<Film> movies = filmService.getFilmeByLocatieFilmare(locatie);
         List<Film> moviesToSee = perecheService.getMoviesToSee(user_curent);
         List<Film> seenMovies = perecheService.getSeenMovies(user_curent);
-        movies.retainAll(moviesToSee);
-        movies.retainAll(seenMovies);
+        movies.removeAll(moviesToSee);
+        movies.removeAll(seenMovies);
         return movies;
     }
 

@@ -69,7 +69,6 @@ public class PrietenieController {
     public List<Utilizator> getFriendsOf(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
-
         return prietenieService.getFriendsOf(user_curent);
     }
 
@@ -109,8 +108,6 @@ public class PrietenieController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.rejectFriendRequest(user_curent, id);
     }
-
-
 
     public List<Utilizator> getSentRequests(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();

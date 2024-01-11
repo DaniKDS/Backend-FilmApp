@@ -11,6 +11,6 @@ public interface FilmRepository extends CrudRepository<Film, Long> {
     Film getFilmByIdFilm(Long idFilm);
     Film getFilmByTitlu(String titlu);
     List<Film> getFilmeByGen(String gen);
-    List<Film> getFilmeByLocatieFilmare(String locatieFilmare);
+    List<Film> getFilmByLocatieFilmare(String locatieFilmare);
 
 }

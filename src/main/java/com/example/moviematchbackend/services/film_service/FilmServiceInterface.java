@@ -22,11 +22,5 @@ public interface FilmServiceInterface {
     Film getFilmByTitlu(String titlu);
     //Aceasta functie returneaza un film din baza de date dupa id-ul sau
 
-    void addMovieToYourOwnList(Long id_film);
-
-    List<Film> getFilmsFromMyFavouriteList();
-
-    void deleteFilmFromFavouriteList(Long id);
-
-
+    List<Film> getFilmeByLocatieFilmare(String locatieFilmare);
 }
