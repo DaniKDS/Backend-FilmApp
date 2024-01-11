@@ -1,19 +1,14 @@
 package com.example.moviematchbackend.services.film_service;
 
-import com.example.moviematchbackend.models.dto.FilmDto;
 import com.example.moviematchbackend.models.entity.Film;
-import com.example.moviematchbackend.models.entity.Utilizator;
 import com.example.moviematchbackend.repositories.FilmRepository;
-import com.example.moviematchbackend.services.utilizator_service.UtilizatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -23,13 +18,11 @@ public class FilmService implements FilmServiceInterface {
     //acest obiect este folosit pentru a apela metodele din clasa FilmRepository
     private FilmRepository filmRepository;
 
-    private List<Film> myFavouriteListOfFilms;
 
     //acest constructor este folosit pentru a crea un obiect de tip FilmService
     @Autowired
     public FilmService(FilmRepository filmRepository, List<Film> myFavouriteListOfFilms) {
         this.filmRepository = filmRepository;
-        this.myFavouriteListOfFilms = myFavouriteListOfFilms;
     }
 
     //aceasta metoda imi returneaza toate filmele din baza de date in format json
@@ -66,42 +59,29 @@ public class FilmService implements FilmServiceInterface {
         return this.filmRepository.getFilmByTitlu(titlu);
     }
 
-    @Override
-    public void addMovieToYourOwnList(Film film) {
-        this.myFavouriteListOfFilms.add(film);
-    }
-
-    @Override
-    public List<Film> getFilmsFromMyFavouriteList() {
-        return this.myFavouriteListOfFilms.stream().toList();
-    }
-
-    @Override
-    public void deleteFilmFromFavouriteList(Long id) {
-        for (Film film1 : this.getFilmsFromMyFavouriteList()) {
-            if (film1.getIdFilm() == id) {
-                this.myFavouriteListOfFilms.remove(film1);
-            }
-        }
-    }
-
 
     public List<Film> getFilmeByGen(String gen) {
         return this.filmRepository.getFilmeByGen(gen);
     }
-
+    @Override
     public List<Film> getFilmeByLocatieFilmare(String locatieFilmare) {
-        return this.filmRepository.getFilmeByLocatieFilmare(locatieFilmare);
+        return this.filmRepository.getFilmByLocatieFilmare(locatieFilmare);
     }
 
-    public Map<String,List<Film>> groupMoviesByGenre(){
-        return this.getAllFilme().stream().collect(Collectors.groupingBy(Film::getGen));
-    }
 
     public Integer getNumberOfMoviesByGenre(String genre){return getFilmeByGen(genre).size();}
 
     public Map<String,List<Film>> groupMoviesByCountry(){
         return this.getAllFilme().stream().collect(Collectors.groupingBy(Film::getLocatieFilmare));
+    }
+
+    public List<String> getCategories(){
+        List<Film> filme = getAllFilme();
+        List<String> categories = new ArrayList<>();
+        for(Film film:filme){
+            if(!categories.contains(film.getGen())) categories.add(film.getGen());
+        }
+        return categories;
     }
 
 }

@@ -31,8 +31,9 @@ public class Pereche implements Serializable {
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "status_vizionare")
     private StatusVizionare statusVizionare;
-    public Pereche(Utilizator utilizator, Film film) {
+    public Pereche(Utilizator utilizator, Film film, StatusVizionare statusVizionare) {
         this.utilizator = utilizator;
         this.film = film;
+        this.statusVizionare = statusVizionare;
     }
 }

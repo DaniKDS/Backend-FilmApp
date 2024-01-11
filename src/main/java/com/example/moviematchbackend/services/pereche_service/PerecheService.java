@@ -42,8 +42,8 @@ public class PerecheService implements PerecheServiceInterface{
     }
     //acesta metoda imi sterge o pereche din baza de date
     @Override
-    public void savePereche(Utilizator utilizator, Film film) {
-        Pereche pereche = new Pereche(utilizator, film);
+    public void savePereche(Utilizator utilizator, Film film, StatusVizionare statusVizionare) {
+        Pereche pereche = new Pereche(utilizator, film, statusVizionare);
         this.perecheRepository.save(pereche);
     }
 
@@ -68,11 +68,19 @@ public class PerecheService implements PerecheServiceInterface{
         return filme;
     }
     public List<Film> getMoviesWithFriend(Utilizator utilizator, Utilizator friend){
-        List<Pereche> perechi = getAllPereche();
         List<Film> my_movies = getMoviesToSee(utilizator);
-        List<Film> filme = new ArrayList<>();
         List<Film> his_movies = getMoviesToSee(friend);
         his_movies.retainAll(my_movies);
         return his_movies;
+    }
+
+    public Pereche getPerecheByUserAndMovie(Utilizator user, Film film){
+        List<Pereche> perechi = getAllPereche();
+        for(Pereche p1:perechi){
+            if(p1.getUtilizator() == user && p1.getFilm() == film){
+                return p1;
+            }
+        }
+        return new Pereche();
     }
 }

@@ -43,6 +43,6 @@ public class Film implements Serializable {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pereche> pereche;
 
-    @Column(name = "imagine", length = 1000000)
-    private byte[] imagine;
+    @Column(name = "imagine")
+    private String imagine;
 }
