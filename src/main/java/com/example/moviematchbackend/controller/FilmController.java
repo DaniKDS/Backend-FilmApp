@@ -57,9 +57,9 @@ public class FilmController {
     }
     //acest endpoint imi returneaza un film dupa id in format json
     @GetMapping("/api/filme/titlu/{titlu}")
-    public FilmDto getFilmByTitlu(@PathVariable String titlu) {
+    public Film getFilmByTitlu(@PathVariable String titlu) {
         Film film = filmService.getFilmByTitlu(titlu);
-        return filmMapper.filmToFilmDto(film);
+        return film;
     }
 
     @GetMapping("/api/filme/gen/{gen}")
@@ -71,9 +71,9 @@ public class FilmController {
     //acest endpoint imi returneaza un film dupa id in format json
 
     @GetMapping("/api/filme/locatie/{locatieFilmare}")
-    public List<FilmDto> getFilmeByLocatieFilmare(@PathVariable String locatieFilmare) {
+    public List<Film> getFilmeByLocatieFilmare(@PathVariable String locatieFilmare) {
         List<Film> filme = filmService.getFilmeByLocatieFilmare(locatieFilmare);
-        return filmMapper.filmeToFilmDtoList(filme);
+        return filme;
     }
 
     @PostMapping("/api/filme")

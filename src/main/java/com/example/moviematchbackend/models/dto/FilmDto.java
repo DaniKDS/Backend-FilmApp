@@ -16,5 +16,6 @@ public class FilmDto {
     private String gen;
     private String durata;
     private String locatieFilmare;
+    private String imagine;
 }
 
