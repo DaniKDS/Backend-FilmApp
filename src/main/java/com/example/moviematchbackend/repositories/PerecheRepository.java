@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 // În interfața PerecheRepository
 public interface PerecheRepository extends JpaRepository<Pereche, Long> {
     Pereche getPerecheByIdPereche(Long idPereche);
+    //Aceasta functie returneaza perechea cu id-ul idPereche
 
 }

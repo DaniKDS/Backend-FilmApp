@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
+// Această clasă este folosită pentru a transfera datele despre un film din baza de date către frontend
 public class FilmDto {
     private String titlu;
     private String descriere;

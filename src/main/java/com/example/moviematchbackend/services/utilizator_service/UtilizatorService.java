@@ -40,6 +40,7 @@ public class UtilizatorService implements UtilizatorServiceInterface{
     public Utilizator getUtilizatorByEmail(String email) {
         return this.utilizatorRepository.getUtilizatorByEmailUtilizator(email);
     }
+    //acesta metoda imi returneaza un utilizator dupa email
     @Override
     public Utilizator getUtilizatorByUsername(String usernameUtilizator) {
         return this.utilizatorRepository.getUtilizatorByUsernameUtilizator(usernameUtilizator);
@@ -52,8 +53,6 @@ public class UtilizatorService implements UtilizatorServiceInterface{
     }
 
     //acesta metoda imi adauga un utilizator in baza de date
-
-
 
     @Override
     public void deleteUtilizator(Utilizator utilizator) {

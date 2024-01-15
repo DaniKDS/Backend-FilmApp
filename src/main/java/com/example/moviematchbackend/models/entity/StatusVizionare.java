@@ -1,5 +1,5 @@
 package com.example.moviematchbackend.models.entity;
-
+// În enum-ul StatusVizionare sunt definite două constante: VAZUT și IN_ASTEPTARE
 public enum StatusVizionare {
     VAZUT,
     IN_ASTEPTARE

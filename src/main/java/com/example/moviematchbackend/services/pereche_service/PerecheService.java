@@ -46,6 +46,7 @@ public class PerecheService implements PerecheServiceInterface{
         Pereche pereche = new Pereche(utilizator, film, statusVizionare);
         this.perecheRepository.save(pereche);
     }
+    //aceasta metoda imi adauga o pereche in baza de date
 
     public List<Film> getMoviesToSee(Utilizator user){
         List<Pereche> perechi = getAllPereche();
@@ -57,6 +58,9 @@ public class PerecheService implements PerecheServiceInterface{
         }
         return filme;
     }
+    //aceasta metoda imi returneaza toate filmele pe care un utilizator trebuie sa le vada
+    //adica toate filmele cu statusul IN_ASTEPTARE pentru un utilizator
+
     public List<Film> getSeenMovies(Utilizator user){
         List<Pereche> perechi = getAllPereche();
         List<Film> filme = new ArrayList<>();
@@ -67,12 +71,17 @@ public class PerecheService implements PerecheServiceInterface{
         }
         return filme;
     }
+    //aceasta metoda imi returneaza toate filmele pe care un utilizator le-a vazut
+    //adica toate filmele cu statusul VAZUT pentru un utilizator
+
     public List<Film> getMoviesWithFriend(Utilizator utilizator, Utilizator friend){
         List<Film> my_movies = getMoviesToSee(utilizator);
         List<Film> his_movies = getMoviesToSee(friend);
         his_movies.retainAll(my_movies);
         return his_movies;
     }
+    //aceasta metoda imi returneaza toate filmele pe care un utilizator si un prieten comun trebuie sa le vada
+    //adica toate filmele cu statusul IN_ASTEPTARE pentru un utilizator si un prieten comun
 
     public Pereche getPerecheByUserAndMovie(Utilizator user, Film film){
         List<Pereche> perechi = getAllPereche();
@@ -83,5 +92,7 @@ public class PerecheService implements PerecheServiceInterface{
         }
         return new Pereche();
     }
+    //aceasta metoda imi returneaza o pereche dupa utilizator si film (daca exista)
+    //daca nu exista, imi returneaza o pereche goala
 
 }

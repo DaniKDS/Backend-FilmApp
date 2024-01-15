@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrietenieRepository extends CrudRepository<Prietenie, Long> {
     Prietenie getPrietenieByIdPrietenie(Long idPrietenie);
+    //Aceasta functie returneaza prietenia cu id-ul idPrietenie
 }

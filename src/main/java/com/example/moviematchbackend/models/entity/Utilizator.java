@@ -18,6 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//AM FOLOSIT LOMBOK PENTRU A NU MAI FOLOSI GETTERI SI SETTERI SI CONSTRUCTORI IN CLASA
 public class Utilizator implements Serializable {
 
     @Id

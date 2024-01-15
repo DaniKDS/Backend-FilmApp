@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 @RestController
 public class UtilizatorController {
 
@@ -91,5 +90,6 @@ public class UtilizatorController {
     public List<UtilizatorDto> emptyfilter(){
         return getUtilizatori();
     }
+    //
 
 }
