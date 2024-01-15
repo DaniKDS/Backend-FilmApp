@@ -36,9 +36,9 @@ The following UML diagrams illustrate the architecture of MovieMatch, including 
 
 ### Prerequisites
 
-1. **Frontend references must be relative (`/login` instead of `http://localhost:8080/login`).
-2. **Determine the pages inaccessible without login for configuration purposes.
-3. **Backend and API paths (excluding login and logout) should start with `/api/`.
+1. Frontend references must be relative (`/login` instead of `http://localhost:8080/login`).
+2. Determine the pages inaccessible without login for configuration purposes.
+3. Backend and API paths (excluding login and logout) should start with `/api/`.
 --- 
 
 ## Nginx Configuration
@@ -78,11 +78,11 @@ server {
 ---
 ## Running the Project:
 
-1. **Start the Backend:
-2. **Start the Frontend:
-3. **Run the following command in a PowerShell terminal within the directory containing nginx.exe (an archive with all files).
+1. Start the Backend:
+2. Start the Frontend:
+3. Run the following command in a PowerShell terminal within the directory containing nginx.exe (an archive with all files).
 start nginx
-4. **Make Changes (if needed):
+4. Make Changes (if needed):
 If adjustments are required, edit the conf/nginx.conf file.
 Reload Nginx Configuration (if needed):
 ./nginx.exe -s reload
