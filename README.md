@@ -7,14 +7,18 @@
 MovieMatch is an application designed to streamline your movie preferences and social interactions. The application boasts several key features:
 
 1. **Add Movies to Your List:** Easily add movies to your personal watchlist.
-2. **Friendship Management:** Send, accept, or decline friendship requests.
-3. **Movie Search:** Quickly find movies within the application.
-4. **User Search:** Locate other users within the application.
-5. **New Movie Notifications:** Receive notifications for newly added movies.
-6. **Movie Filtering by Category:** Filter movies based on categories.
+2. **Movie Deletion:** Remove movies from your lists.
+3. **Friendship Management:** Send, accept, or decline friendship requests.
+4. **Movie Search:** Quickly find movies within the application.
+5. **User Search:** Locate other users within the application.
+6. **Categorized Movie Display::** View movies grouped by categories.
 7. **Create a Shared List:** Establish a shared movie list with friends.
-8. **Movie Deletion:** Remove movies from your lists.
-9. **Already Watched List:** Maintain a list of movies you've already watched.
+8. **Already Watched List:** Maintain a list of movies you've already watched.
+
+## Additional Features
+
+9. **Daily Movie Recommendations:** Discover 10 random movies generated daily.
+10. **Country-based Movie Viewing:** Explore all movies filmed in a specific country.
 ---
 
 ## UML Diagrams
