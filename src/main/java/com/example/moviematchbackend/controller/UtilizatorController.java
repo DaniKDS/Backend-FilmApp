@@ -70,12 +70,12 @@ public class UtilizatorController {
 
         // Collect lowercased concatenated names into a set
         Set<String> lowerCaseNames = user1.stream()
-                .map(utilizator -> utilizator.getNumeUtilizator().toLowerCase() + utilizator.getPrenumeUtilizator().toLowerCase())
+                .map(utilizator -> utilizator.getNumeUtilizator().toLowerCase() + " " + utilizator.getPrenumeUtilizator().toLowerCase() + " ")
                 .collect(Collectors.toSet());
 
         // Filter users based on lowercase concatenated names present in lowerCaseNames set
         Predicate<Utilizator> nameMatchesSearchText = utilizator -> {
-            String fullNameLower = utilizator.getNumeUtilizator().toLowerCase() + utilizator.getPrenumeUtilizator().toLowerCase();
+            String fullNameLower = utilizator.getNumeUtilizator().toLowerCase() + " " + utilizator.getPrenumeUtilizator().toLowerCase() + " ";
             String searchTextLower = searchText.toLowerCase();
             return fullNameLower.contains(searchTextLower);
         };

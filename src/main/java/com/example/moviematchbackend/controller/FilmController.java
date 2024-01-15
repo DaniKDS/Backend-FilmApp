@@ -57,9 +57,9 @@ public class FilmController {
     }
     //acest endpoint imi returneaza un film dupa id in format json
     @GetMapping("/api/filme/titlu/{titlu}")
-    public FilmDto getFilmByTitlu(@PathVariable String titlu) {
+    public Film getFilmByTitlu(@PathVariable String titlu) {
         Film film = filmService.getFilmByTitlu(titlu);
-        return filmMapper.filmToFilmDto(film);
+        return film;
     }
 
     @GetMapping("/api/filme/gen/{gen}")
@@ -71,9 +71,9 @@ public class FilmController {
     //acest endpoint imi returneaza un film dupa id in format json
 
     @GetMapping("/api/filme/locatie/{locatieFilmare}")
-    public List<FilmDto> getFilmeByLocatieFilmare(@PathVariable String locatieFilmare) {
+    public List<Film> getFilmeByLocatieFilmare(@PathVariable String locatieFilmare) {
         List<Film> filme = filmService.getFilmeByLocatieFilmare(locatieFilmare);
-        return filmMapper.filmeToFilmDtoList(filme);
+        return filme;
     }
 
     @PostMapping("/api/filme")
@@ -111,9 +111,7 @@ public class FilmController {
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         List<Film> filme = filmService.getAllFilme();
-        List<Film> yourMovies = perecheService.getMoviesToSee(user_curent);
         List<Film> result = new ArrayList<>();
-        filme.removeAll(yourMovies);
         LocalDate localDate = LocalDate.now();
         Random rnd = new Random(Timestamp.valueOf(localDate.atStartOfDay()).getTime());
         int i = 0,y;

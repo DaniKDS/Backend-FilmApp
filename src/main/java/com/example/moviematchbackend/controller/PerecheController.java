@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,13 +43,13 @@ public class PerecheController {
         return perecheService.getPerecheById(id);
     }
     //acest endpoint imi returneaza o pereche dupa id in format json
-    @GetMapping("/api/filme_de_vazut/")
+    @GetMapping("/api/filme_de_vazut")
     public List<Film> getMoviesToSee(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return perecheService.getMoviesToSee(user_curent);
     }
-    @GetMapping("/api/filme_vazute/")
+    @GetMapping("/api/filme_vazute")
     public List<Film> getSeenMovies(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
@@ -97,6 +98,7 @@ public class PerecheController {
         Film film = filmService.getFilmByIdFilm(id);
         perecheService.deletePereche(perecheService.getPerecheByUserAndMovie(user_curent, film));
         perecheService.savePereche(user_curent,film, StatusVizionare.VAZUT);
+
     }
 
     @PostMapping("/api/film/adauga_film_in_lista/{id}")
