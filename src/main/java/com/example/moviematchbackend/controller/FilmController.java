@@ -111,9 +111,7 @@ public class FilmController {
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         List<Film> filme = filmService.getAllFilme();
-        List<Film> yourMovies = perecheService.getMoviesToSee(user_curent);
         List<Film> result = new ArrayList<>();
-        filme.removeAll(yourMovies);
         LocalDate localDate = LocalDate.now();
         Random rnd = new Random(Timestamp.valueOf(localDate.atStartOfDay()).getTime());
         int i = 0,y;
