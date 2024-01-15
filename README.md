@@ -89,6 +89,6 @@ Reload Nginx Configuration (if needed):
 
 ## Concllusion
 
-**In closing, let's take a moment to reflect on our journey together. As BugBusters, we embarked on a mission to create MovieMatch, a platform designed to enhance the way users connect with movies and each other. Through collaboration, creativity, and a shared passion for problem-solving, we've not only addressed challenges but also transformed them into opportunities.
+In closing, let's take a moment to reflect on our journey together. As BugBusters, we embarked on a mission to create MovieMatch, a platform designed to enhance the way users connect with movies and each other. Through collaboration, creativity, and a shared passion for problem-solving, we've not only addressed challenges but also transformed them into opportunities.
 
-**Our dedication and teamwork have shaped MovieMatch into a testament of our collective capabilities. Each line of code, every thoughtful design choice, and the countless debugging sessions have been keystones in the foundation of this project. It's more than just a collection of features; it's a manifestation of our commitment to excellence.
+Our dedication and teamwork have shaped MovieMatch into a testament of our collective capabilities. Each line of code, every thoughtful design choice, and the countless debugging sessions have been keystones in the foundation of this project. It's more than just a collection of features; it's a manifestation of our commitment to excellence.
