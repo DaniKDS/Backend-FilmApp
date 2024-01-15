@@ -36,9 +36,9 @@ The following UML diagrams illustrate the architecture of MovieMatch, including 
 
 ### Prerequisites
 
-1. Frontend references must be relative (`/login` instead of `http://localhost:8080/login`).
-2. Determine the pages inaccessible without login for configuration purposes.
-3. Backend and API paths (excluding login and logout) should start with `/api/`.
+1. **Frontend references must be relative (`/login` instead of `http://localhost:8080/login`).
+2. **Determine the pages inaccessible without login for configuration purposes.
+3. **Backend and API paths (excluding login and logout) should start with `/api/`.
 --- 
 
 ## Nginx Configuration
@@ -76,18 +76,19 @@ server {
 }
 ```
 ---
-##Running the Project:
+## Running the Project:
 
-1.Start the Backend:
-2.Start the Frontend:
-3.Run the following command in a PowerShell terminal within the directory containing nginx.exe (an archive with all files).
+1. **Start the Backend:
+2. **Start the Frontend:
+3. **Run the following command in a PowerShell terminal within the directory containing nginx.exe (an archive with all files).
 start nginx
-4.Make Changes (if needed):
+4. **Make Changes (if needed):
 If adjustments are required, edit the conf/nginx.conf file.
 Reload Nginx Configuration (if needed):
 ./nginx.exe -s reload
-##Concllusion
 
-In closing, let's take a moment to reflect on our journey together. As BugBusters, we embarked on a mission to create MovieMatch, a platform designed to enhance the way users connect with movies and each other. Through collaboration, creativity, and a shared passion for problem-solving, we've not only addressed challenges but also transformed them into opportunities.
+## Concllusion
 
-Our dedication and teamwork have shaped MovieMatch into a testament of our collective capabilities. Each line of code, every thoughtful design choice, and the countless debugging sessions have been keystones in the foundation of this project. It's more than just a collection of features; it's a manifestation of our commitment to excellence.
+**In closing, let's take a moment to reflect on our journey together. As BugBusters, we embarked on a mission to create MovieMatch, a platform designed to enhance the way users connect with movies and each other. Through collaboration, creativity, and a shared passion for problem-solving, we've not only addressed challenges but also transformed them into opportunities.
+
+**Our dedication and teamwork have shaped MovieMatch into a testament of our collective capabilities. Each line of code, every thoughtful design choice, and the countless debugging sessions have been keystones in the foundation of this project. It's more than just a collection of features; it's a manifestation of our commitment to excellence.
