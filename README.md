@@ -36,9 +36,7 @@ The following UML diagrams illustrate the architecture of MovieMatch, including 
 
 ### Prerequisites
 
-1. Frontend references must be relative (`/login` instead of `http://localhost:8080/login`).
-2. Determine the pages inaccessible without login for configuration purposes.
-3. Backend and API paths (excluding login and logout) should start with `/api/`.
+1. Backend and API paths (excluding login and logout) should start with `/api/`.
 --- 
 
 ## Nginx Configuration
@@ -66,12 +64,6 @@ server {
         proxy_pass http://localhost:5173;
     }
     
-    # login required; not implemented yet
-    location /test.html {
-        auth_request /api/test;
-        error_page 500 =302 /oauth2/authorization/google; 
-        proxy_pass http://localhost:5173;
-    }
 }
 }
 ```
