@@ -10,8 +10,10 @@ public class MapStructConfig {
     public FilmMapper filmMapper() {
         return Mappers.getMapper(FilmMapper.class);
     }
+    // Această metodă returnează un obiect de tip FilmMapper
     @Bean
     public UtilizatorMapper utilizatorMapper() {
         return Mappers.getMapper(UtilizatorMapper.class); // sau UtilizatorMapper.INSTANCE
     }
+    // Această metodă returnează un obiect de tip UtilizatorMapper
 }

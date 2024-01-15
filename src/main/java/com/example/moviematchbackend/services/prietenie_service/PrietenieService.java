@@ -58,9 +58,13 @@ public class PrietenieService implements PrietenieServiceInterface {
     public void deletePrietenie(Prietenie prietenie) {
         this.prietenieRepository.delete(prietenie);
     }
+    //acesta metoda imi sterge o prietenie din baza de date
+
+    // Această metodă returnează o listă de utilizatori cărora utilizatorul curent le-a trimis cereri de prietenie care încă sunt în așteptare.
     public List<Utilizator> getSentRequests(Utilizator user_curent){
         List<Prietenie> prietenii = getAllPrietenii();
         List<Utilizator> prieteniOf = new ArrayList<>();
+        // Se verifică dacă utilizatorul curent este cel care a trimis cererea și dacă cererea este încă în așteptare
         for(Prietenie pr: prietenii){
             if(pr.getUtilizator1() == user_curent && pr.getStatusCerere() == StatusCerere.IN_ASTEPTARE){
                 prieteniOf.add(pr.getUtilizator2());
@@ -68,6 +72,9 @@ public class PrietenieService implements PrietenieServiceInterface {
         }
         return prieteniOf;
     }
+
+    // Această metodă returnează o prietenie după id-ul celor doi utilizatori implicați în prietenie (utilizator1 și utilizator2)
+    // Dacă nu există o prietenie între cei doi utilizatori, se returnează null
     public Prietenie getPrietenieByUsers(Long idUtil1, Long idUtil2){
         List<Prietenie> prietenii = getAllPrietenii();
         for(Prietenie prietenie:prietenii){
@@ -77,6 +84,9 @@ public class PrietenieService implements PrietenieServiceInterface {
         }
         return null;
     }
+
+    // Această metodă returnează o listă de prieteni ai utilizatorului specificat, unde cererile de prietenie au
+    // fost acceptate de ambele părți
     public List<Utilizator> getFriendsOf(Utilizator utilizator){
         List<Prietenie> prietenii = getAllPrietenii();
         List<Utilizator> prieteniOf = new ArrayList<>();
@@ -87,6 +97,8 @@ public class PrietenieService implements PrietenieServiceInterface {
         }
         return prieteniOf;
     }
+
+    // Această metodă trimite o cerere de prietenie de la utilizatorul curent către un alt utilizator cu ID-ul specificat.
     public ResponseEntity<String> sendFriendRequest(Utilizator user_curent, Long id){
         Prietenie prietenie = new Prietenie();
         Utilizator viitor_prieten = utilizatorRepository.getUtilizatorByIdUtilizator(id);
@@ -120,6 +132,8 @@ public class PrietenieService implements PrietenieServiceInterface {
             return new ResponseEntity<>("Exista deja o cerere de prietenie in curs.", HttpStatus.valueOf(400));
         }
     }
+
+    // Această metodă acceptă o cerere de prietenie între utilizatorul curent și un alt utilizator cu ID-ul specificat
     public ResponseEntity<String> acceptFriendRequest(Utilizator user_curent, Long id){
         Prietenie prietenie = new Prietenie();
         Prietenie prietenie1 = getPrietenieByUsers(id, user_curent.getIdUtilizator());
@@ -142,7 +156,8 @@ public class PrietenieService implements PrietenieServiceInterface {
             }
         }
     }
-
+    // Această metodă returnează o listă de utilizatori care au trimis cereri de prietenie către
+    // utilizatorul curent și aceste cereri încă sunt în așteptare
     public List<Utilizator> getReceivedRequests(Utilizator user_curent){
         List<Prietenie> prietenii = getAllPrietenii();
         List<Utilizator> prieteniOf = new ArrayList<>();
@@ -154,6 +169,8 @@ public class PrietenieService implements PrietenieServiceInterface {
         return prieteniOf;
     }
 
+    // Această metodă returnează o listă de utilizatori care nu sunt prieteni sau au cereri de
+    // prietenie în așteptare cu utilizatorul specificat
     public List<Utilizator> getEnemiesOf(Utilizator user_curent){
         List<Utilizator> users = new ArrayList<>();
         this.utilizatorRepository.findAll().forEach(utilizator -> users.add(utilizator));
@@ -162,9 +179,11 @@ public class PrietenieService implements PrietenieServiceInterface {
         users.remove(user_curent);
         users.removeAll(getReceivedRequests(user_curent));
         users.removeAll(getSentRequests(user_curent));
+        // Returnează lista de utilizatori care nu sunt prieteni sau au cereri de prietenie în
+        // așteptare cu utilizatorul specificat
         return users;
     }
-
+    // Această metodă șterge o prietenie între utilizatorul curent și un alt utilizator cu ID-ul specificat
     public ResponseEntity<String> deleteFriend(Utilizator user_curent, Long id){
         Prietenie prietenie1 = getPrietenieByUsers(user_curent.getIdUtilizator(), id);
 
@@ -187,6 +206,7 @@ public class PrietenieService implements PrietenieServiceInterface {
         }
     }
 
+    // Această metodă respinge o cerere de prietenie între utilizatorul curent și un alt utilizator cu ID-ul specificat
     public ResponseEntity<String> rejectFriendRequest(Utilizator user_curent, Long id){
         Response response = new Response();
         Prietenie prietenie1 = getPrietenieByUsers(id, user_curent.getIdUtilizator());

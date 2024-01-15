@@ -17,6 +17,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//AM FOLOSIT LOMBOK PENTRU A NU MAI FOLOSI GETTERI SI SETTERI SI CONSTRUCTORI IN CLASA
 public class Prietenie implements Serializable {
 
     @Id

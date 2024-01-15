@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 
 //acea clasa care imi face legatura dintre frontend si backend
 
-
 @RestController
 public class FilmController {
 
@@ -46,7 +45,7 @@ public class FilmController {
         List<Film> filme = this.filmService.getAllFilme();
         return filmMapper.filmeToFilmDtoList(filme);
     }
-    //acest endpoint imi returneaza toate filmele din baza de date in format json
+    //acest endpoint imi returneaza toate filmele din baza de date
     public List<Film> getFilme1() {
         return this.filmService.getAllFilme();
     }
@@ -55,7 +54,7 @@ public class FilmController {
         Film film = filmService.getFilmByIdFilm(id);
         return filmMapper.filmToFilmDto(film);
     }
-    //acest endpoint imi returneaza un film dupa id in format json
+    //acest endpoint imi returneaza un film dupa id
     @GetMapping("/api/filme/titlu/{titlu}")
     public Film getFilmByTitlu(@PathVariable String titlu) {
         Film film = filmService.getFilmByTitlu(titlu);
@@ -106,6 +105,9 @@ public class FilmController {
 
         return filme;
     }
+    // Această metodă de tip GET filtrează filmele după un text de căutare și returnează o listă de
+    // obiecte FilmDto care corespund criteriilor
+
     @GetMapping("/api/random_movies")
     List<Film> getRandomMovies(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
@@ -113,9 +115,11 @@ public class FilmController {
         List<Film> filme = filmService.getAllFilme();
         List<Film> result = new ArrayList<>();
         LocalDate localDate = LocalDate.now();
+        // Crează un obiect Random bazat pe data curentă
         Random rnd = new Random(Timestamp.valueOf(localDate.atStartOfDay()).getTime());
         int i = 0,y;
         List<Integer> randoms = new ArrayList<>();
+        // Generează 10 indici aleatori pentru filmele din sistem
         while(i<10){
             y = rnd.nextInt(filme.size());
             if(!randoms.contains(y)){
@@ -126,15 +130,20 @@ public class FilmController {
         for(Integer k: randoms){
             result.add(filme.get(k));
         }
+        // Returnează lista cu 10 filme aleatoare
         return result;
     }
+    // Această metodă de tip GET returnează o listă de filme aleatoare din sistem
 
     @GetMapping("/api/filter_movie/")
     public List<FilmDto> emptyfilter(){
         return getFilme();
     }
+    // Această metodă de tip GET returnează o listă de obiecte FilmDto
+    // reprezentând toate filmele disponibile în sistem, fără a aplica filtre
 
     @GetMapping("/api/filme/categorii/")
     public List<String> getCategories(){ return filmService.getCategories();}
+    // Această metodă de tip GET returnează o listă de categorii disponibile pentru filmele din sistem
 
 }

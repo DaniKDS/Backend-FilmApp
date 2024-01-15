@@ -52,18 +52,22 @@ public class PrietenieController {
     public void deletePrietenie(@PathVariable Long id) {
         this.prietenieService.deletePrietenie(this.prietenieService.getPrietenieById(id));
     }
+    //acest endpoint imi sterge o prietenie din baza de date
+
     @PostMapping("/api/cerere_prietenie/send/{id}")
     public ResponseEntity<String> sendFriendRequest(Authentication authentication, @PathVariable Long id){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.sendFriendRequest(user_curent, id);
     }
+    //acest endpoint imi trimite o cerere de prietenie catre un utilizator cu id-ul id
     @PostMapping("/api/cerere_prietenie/accept/{id}")
     public ResponseEntity<String> acceptFriendRequest(Authentication authentication, @PathVariable Long id){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.acceptFriendRequest(user_curent, id);
-    }
+    }// Această metodă de tip POST acceptă o cerere de prietenie pentru utilizatorul
+    // curent și un prieten identificat prin id
 
     @GetMapping("/api/afisare_prieteni")
     public List<Utilizator> getFriendsOf(Authentication authentication){
@@ -71,6 +75,7 @@ public class PrietenieController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.getFriendsOf(user_curent);
     }
+    // Această metodă de tip GET returnează lista de prieteni a utilizatorului curent
 
     @GetMapping("/api/afisare_cereri")
     public List<Utilizator> getReceivedRequests(Authentication authentication){
@@ -78,6 +83,7 @@ public class PrietenieController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.getReceivedRequests(user_curent);
     }
+    // Această metodă de tip GET returnează lista de cereri primite de la alți utilizatori pentru prietenie
 
     @GetMapping("/api/afisare_inamici")
     public List<Utilizator> getEnemiesOf(Authentication authentication){
@@ -85,6 +91,8 @@ public class PrietenieController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.getEnemiesOf(user_curent);
     }
+    // Această metodă de tip GET returnează lista de utilizatori care nu sunt prieteni cu utilizatorul curent,
+    // nu au trimis cereri de prietenie și nu au primit cereri de prietenie
 
 
     @PostMapping("/api/stergere_prieten/{id}")
@@ -100,6 +108,9 @@ public class PrietenieController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.getPrietenieByUsers(user_curent.getIdUtilizator(), id);
     }
+    // Această metodă de tip POST primește un id de utilizator și șterge relația de
+    // prietenie cu utilizatorul corespunzător
+
     @PostMapping("/api/cerere_prietenie/reject/{id}")
     public ResponseEntity<String> rejectFriendRequest(Authentication authentication, @PathVariable Long id){
         Response response = new Response();
@@ -108,10 +119,12 @@ public class PrietenieController {
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.rejectFriendRequest(user_curent, id);
     }
+    // Această metodă de tip POST primește un id de utilizator și respinge cererea de prietenie corespunzătoare
 
     public List<Utilizator> getSentRequests(Authentication authentication){
         String user_email = ((DefaultOidcUser) authentication.getPrincipal()).getEmail();
         Utilizator user_curent = utilizatorService.getUtilizatorByEmail(user_email);
         return prietenieService.getSentRequests(user_curent);
     }
+    // Această metodă de tip GET returnează lista de cereri de prietenie trimise de utilizatorul curent
 }

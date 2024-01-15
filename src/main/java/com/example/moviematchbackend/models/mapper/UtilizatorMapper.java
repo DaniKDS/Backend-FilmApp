@@ -8,7 +8,8 @@ import com.example.moviematchbackend.models.entity.Utilizator;
 
 import java.util.List;
 
-@Mapper
+@Mapper//    @Mapper: Anotarea care indică că această interfață este folosită pentru generarea codului MapStruct.
+        //    INSTANCE: O variabilă statică pentru a obține o instanță a maperului generat.
 public interface UtilizatorMapper {
     UtilizatorMapper INSTANCE = Mappers.getMapper(UtilizatorMapper.class);
 
@@ -17,15 +18,13 @@ public interface UtilizatorMapper {
     UtilizatorDto utilizatorToUtilizatorDto(Utilizator utilizator);
 
     Utilizator utilizatorDtoToUtilizator(UtilizatorDto utilizatorDto);
+    // Această metodă converteste un obiect de tip UtilizatorDto într-un obiect de tip Utilizator
 
     List<UtilizatorDto> utilizatoriToUtilizatorDtoList(List<Utilizator> utilizatori);
+    // Această metodă converteste o listă de obiecte de tip Utilizator într-o listă de obiecte de tip UtilizatorDto
 
     List<Utilizator> utilizatorDtoListToUtilizator(List<UtilizatorDto> utilizatorDtoList);
+    // Această metodă converteste o listă de obiecte de tip UtilizatorDto într-o listă de obiecte de tip Utilizator
 }
 
-//@Mapper: Anotarea care indică că această interfață este folosită pentru generarea codului MapStruct.
-//    INSTANCE: O variabilă statică pentru a obține o instanță a maperului generat.
-//    Metodele utilizatorToUtilizatorDto și utilizatorDtoToUtilizator: Acestea definesc reguli de mapare între câmpurile
-//    obiectelor Utilizator și UtilizatorDto.
-//    Metodele implicite utilizatoriToUtilizatorDtoList și utilizatorDtoListToUtilizator: Acestea definesc maparea între
-//    liste de obiecte Utilizator și UtilizatorDto.
+

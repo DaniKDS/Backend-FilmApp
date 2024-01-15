@@ -69,16 +69,20 @@ public class FilmService implements FilmServiceInterface {
     public List<Film> getFilmeByLocatieFilmare(String locatieFilmare) {
         return this.filmRepository.getFilmByLocatieFilmare(locatieFilmare);
     }
-
     public Map<String,List<Film>> groupMoviesByGenre(){
         return this.getAllFilme().stream().collect(Collectors.groupingBy(Film::getGen));
     }
+    // Această metodă grupează filmele în funcție de gen și returnează un map cu
+    // genul ca cheie și o listă de filme corespunzătoare.
 
     public Integer getNumberOfMoviesByGenre(String genre){return getFilmeByGen(genre).size();}
+    // Această metodă returnează numărul de filme dintr-un anumit gen
 
     public Map<String,List<Film>> groupMoviesByCountry(){
         return this.getAllFilme().stream().collect(Collectors.groupingBy(Film::getLocatieFilmare));
     }
+    // Această metodă grupează filmele în funcție de țara de filmare și
+    // returnează un map cu țara ca cheie și o listă de filme corespunzătoare
 
     public List<String> getCategories(){
         List<Film> filme = getAllFilme();
@@ -88,5 +92,6 @@ public class FilmService implements FilmServiceInterface {
         }
         return categories;
     }
+    // Această metodă returnează o listă de categorii distincte disponibile pentru filmele existente în sistem
 
 }

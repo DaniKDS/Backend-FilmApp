@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper //Anotarea Mapper este folosita pentru a genera codul necesar pentru a converti un obiect de tip Film in FilmDto si invers
+@Mapper //Anotarea Mapper este folosita pentru a genera codul necesar pentru a converti un
+        // obiect de tip Film in FilmDto si invers
 @Component //Anotarea Component este folosita pentru a marca clasa ca fiind un bean
-//Clasa Mapper este folosita pentru a converti un obiect de tip Film in FilmDto si invers
+            //Clasa Mapper este folosita pentru a converti un obiect de tip Film in FilmDto si invers
 public interface FilmMapper {
     FilmMapper INSTANCE = Mappers.getMapper(FilmMapper.class);
 
@@ -26,11 +27,13 @@ public interface FilmMapper {
             .map(this::filmToFilmDto)
             .collect(Collectors.toList());
     }
+    // Această metodă converteste o listă de obiecte de tip Film într-o listă de obiecte de tip FilmDto
 
     default List<Film> filmDtoListToFilm(List<FilmDto> filmDtoList) {
         return filmDtoList.stream()
             .map(this::filmDtoToFilm)
             .collect(Collectors.toList());
     }
+    // Această metodă converteste o listă de obiecte de tip FilmDto într-o listă de obiecte de tip Film
 }
 
